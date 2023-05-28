@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ViewUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Vuser/home');
 });
+
+// Route untuk kategori
+Route::get("Vuser/kategori", [ViewUser::class, 'kategori']);
+
+// Route untuk brand
+Route::get("Vuser/brand", [ViewUser::class, 'brand']);
+
+// Route untuk lokasi
+Route::get("Vuser/lokasi", [ViewUser::class, 'lokasitoko']);
+
+// Route untuk contact
+Route::get("Vuser/contact", [ViewUser::class, 'contact']);
