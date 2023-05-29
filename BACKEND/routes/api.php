@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Produk;
 use App\Http\Controllers\Kategori;
+use App\Http\Controllers\Merek;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,14 @@ Route::delete('/deletekategori/{parameter}', [Kategori::class, 'deletekategori']
 Route::post('/insertkategori', [Kategori::class, 'insertkategori']);
 // Route untuk update data kategori
 Route::put('/updateKategori/{parameter}', [Kategori::class, 'updateKategori']);
+
+// Route untuk tampil data merek
+Route::get('/tampilmerek', [Merek::class, 'tampilmerek']);
+// Route untuk tampil data merek
+Route::get('/detailmerek/{parameter}', [Merek::class, 'detailmerek']); 
+// Route Untuk hapus data merek
+Route::delete('/deletemerek/{parameter}', [Merek::class, 'deletemerek']);
+// Route Untuk tambah data merek
+Route::post('/insertmerek', [Merek::class, 'insertmerek']);
+// Route untuk update data kategori
+Route::put('/updateMerek/{parameter}', [Merek::class, 'updateMerek']);
