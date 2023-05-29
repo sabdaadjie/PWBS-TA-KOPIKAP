@@ -54,3 +54,25 @@ Route::delete('/deletemerek/{parameter}', [Merek::class, 'deletemerek']);
 Route::post('/insertmerek', [Merek::class, 'insertmerek']);
 // Route untuk update data kategori
 Route::put('/updateMerek/{parameter}', [Merek::class, 'updateMerek']);
+
+// Route untuk tampil data merek
+Route::get('/tampilmerek', [Merek::class, 'tampilmerek']);
+// Route untuk tampil data merek
+Route::get('/detailmerek/{parameter}', [Merek::class, 'detailmerek']); 
+// Route Untuk hapus data merek
+Route::delete('/deletemerek/{parameter}', [Merek::class, 'deletemerek']);
+// Route Untuk tambah data merek
+Route::post('/insertmerek', [Merek::class, 'insertmerek']);
+// Route untuk update data kategori
+Route::put('/updateMerek/{parameter}', [Merek::class, 'updateMerek']);
+
+// Route untuk tampil data user
+Route::get('/tampiluser', [User::class, 'tampiluser']);
+// Route untuk tampil data user
+Route::get('/detailuser/{parameter}', [User::class, 'detailuser']); 
+// Route Untuk hapus data user
+Route::delete('/deleteuser/{parameter}', [User::class, 'deleteuser']);
+// Route Untuk tambah data user
+Route::post('/insertuser', [User::class, 'insertuser']);
+// Route untuk update data user
+Route::put('/updateUser/{parameter}', [User::class, 'updateUser']);
