@@ -51,16 +51,16 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active">
+                            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('/')}}">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ Request::is('Vuser/kategori') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('Vuser/kategori')}}">Kategori</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ Request::is('Vuser/brand') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('Vuser/brand')}}">Brand</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ Request::is('Vuser/lokasi') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('Vuser/lokasi') }}">Lokasi Toko</a>
                             </li>
                             <!-- <li class="nav-item submenu dropdown">
@@ -108,7 +108,7 @@
                                     </li>
                                 </ul>
                             </li> -->
-                            <li class="nav-item">
+                            <li class="nav-item {{ Request::is('Vuser/contact') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('Vuser/contact') }}">Contact</a>
                             </li>
                         </ul>
