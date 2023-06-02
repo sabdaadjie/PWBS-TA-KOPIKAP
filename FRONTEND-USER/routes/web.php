@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Vuser/home');
+    return view('home');
 });
 
 // Route untuk kategori
-Route::get("Vuser/kategori", [ViewUser::class, 'kategori']);
+Route::get("kategori", [ViewUser::class, 'kategori']);
 
 // Route untuk brand
-Route::get("Vuser/brand", [ViewUser::class, 'brand']);
+Route::get("brand", [ViewUser::class, 'brand']);
 
-// Route untuk lokasi
-Route::get("Vuser/lokasi", [ViewUser::class, 'lokasitoko']);
+// Route untuk about
+Route::get("about", [ViewUser::class, 'about']);
 
 // Route untuk contact
-Route::get("Vuser/contact", [ViewUser::class, 'contact']);
+Route::get("contact", [ViewUser::class, 'contact']);

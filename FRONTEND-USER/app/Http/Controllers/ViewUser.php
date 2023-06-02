@@ -11,22 +11,22 @@ class ViewUser extends Controller
     // Pepindahan link
     function kategori()
     {
-        // tampilkan view "env_karyawan"
-        return view("Vuser/kategori");
+        
+        return view("kategori");
     }
     function brand()
     {
-        // tampilkan view "env_karyawan"
-        return view("Vuser/brand");
+   
+        return view("brand");
     }
-    function lokasitoko()
+    function about()
     {
-        // tampilkan view "env_karyawan"
-        return view("Vuser/lokasi");
+   
+        return view("about");
     }
     function contact()
     {
-        // tampilkan view "env_karyawan"
-        return view("Vuser/contact");
+   
+        return view("contact");
     }
 }

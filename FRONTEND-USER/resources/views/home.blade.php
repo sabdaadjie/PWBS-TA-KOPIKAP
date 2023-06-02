@@ -1,10 +1,10 @@
-@extends('Vuser/tamplate')
+@extends('tamplate')
 
-@section('Vuser/title_tamplate')
+@section('title_tamplate')
 <title>Home</title>
 @endsection
 
-@section('Vuser/body_tamplate')
+@section('body_tamplate')
 
 <!-- Banner Promo -->
 <section class="section_gap_top">
