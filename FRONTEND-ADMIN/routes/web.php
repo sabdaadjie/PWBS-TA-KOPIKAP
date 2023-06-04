@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 });
+
+// Route untuk tambah data
+Route::get("/add", [AdminController::class, 'add']);
+
+// Route untuk View User
+Route::get("/vw_user", [AdminController::class, 'vw_user']);
