@@ -31,6 +31,8 @@ Route::get('/detail/{parameter}', [Produk::class, 'detail']);
 Route::delete('/delete/{parameter}', [Produk::class, 'delete']);
 // Route Untuk tambah data produk
 Route::post('/insert', [Produk::class, 'insert']);
+// Route Untuk tambah data produk
+Route::post('/uploadgambar', [Produk::class, 'uploadgambar']);
 // Route untuk update data produk
 Route::put('/updateProduk/{parameter}', [Produk::class, 'updateProduk']);
 

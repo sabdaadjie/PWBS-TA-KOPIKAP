@@ -119,6 +119,56 @@ class Produk extends Controller
         ], http_response_code());
     }
 
+    // buat function untuk insert data
+    function uploadgambar(Request $req)
+    {
+        // ambil data hasil input
+        $data = array(
+            "Id_Produk" => $req->Id_Produk,
+            "Nama_Produk" => $req->Nama_Produk,
+            "Harga" => $req->Harga,
+            "Stok_Produk" => $req->Stok_Produk,
+            "Spesifikasi" => $req->Spesifikasi,
+            "Foto_Produk" => $req->file('Foto_Produk')->store('public/gambar'),
+            "Kategori" => $req->Kategori,
+            "Merek" => $req->Merek,
+
+        );
+
+
+        // baruu
+        $parameter =($data["Id_Produk"]);
+        // cek apakah data karyawan (nik) sudah pernah tersimpan/belum
+        $check = $this->model->detailData($parameter);
+
+
+        // jika data tidak ditemukan
+        if (count($check) == 0) {
+            // lakukan proses penyimpanan
+            $this->model->saveData($data["Id_Produk"], $data["Nama_Produk"], $data["Harga"], $data["Stok_Produk"], $data["Spesifikasi"], $data["Foto_Produk"],$data
+            ["Kategori"], $data["Merek"]);
+            // buat pesan dan status hasil penyimpanan data
+            $status = 1;
+            $pesan = "Data Berhasil disimpan";
+        }
+        // jika data tidak ditemukan
+        else {
+
+            // tampilkan pesan data gagal disimpan
+            $status = 0;
+            $pesan = "Data Gagal disimpan";
+        }
+        // tampilkan hasil respon
+
+        return response([
+            "status" => $status,
+            "pesan" => $pesan
+        ], http_response_code());
+
+        // $result = $req->file('Foto_Produk')->store('public/img');
+        // return ["result"=>$result];
+    }
+
     // Function untuk Update Data Kamar
     function updateProduk(
         $parameter,
