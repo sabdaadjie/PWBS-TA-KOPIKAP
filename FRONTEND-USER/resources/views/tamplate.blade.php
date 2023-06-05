@@ -31,9 +31,8 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/ion.rangeSlider.skinFlat.css')}}" />
   <link rel="stylesheet" type="text/css" href="{{asset('css/magnific-popup.css')}}" />
   <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}" />
-  <!-- Boostrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
-</head>
+  <!-- Boostrap 530 -->
+  <link rel="stylesheet" type="text/css" href="{{asset('bootstrap530/css/bootstrap.css')}}" />
 
 <body>
   <!-- Start Header Area -->
@@ -142,7 +141,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
   <script src="{{ asset('js/gmaps.min.js') }}"></script>
   <script src="{{ asset('js/main.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+  <script src="{{ asset('bootstrap530/js/bootstrap.js') }}"></script>
 </body>
 
 </html>
