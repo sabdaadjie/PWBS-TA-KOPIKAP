@@ -103,10 +103,8 @@ class Merek extends Controller
     }
 
     // Function untuk Update Data Kamar
-    function updateMerek(
-        $parameter,
-        Request $req
-    ) {
+    function updateMerek($parameter,Request $req)
+     {
         // Ambil data hasil input
         $data = array(
             "Id_Merek" => $req->Id_Merek,
