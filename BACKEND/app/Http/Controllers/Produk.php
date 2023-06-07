@@ -19,7 +19,7 @@ class Produk extends Controller
 
         // tampikan hasil dari "tbl_produk"
         return response([
-            "Tampil Produk" => $data
+            "tampilproduk" => $data
         ], http_response_code());
     }
 
@@ -31,17 +31,18 @@ class Produk extends Controller
  
          // Tampilkan hasil dari "tbl_produk" join "tbl_kategori" join "tbl_merek"
          return response([
-             "Detail Tampil Data Relasi" => $data
+             "detailtampilrelasi" => $data
          ], http_response_code());
      }
 
+    //  Fungsi untuk tampil data per Id/data
     function detail($parameter)
     {   // ambil fungsi dari detailData(dari MProduk)
         $data = $this->model->detailData($parameter);
 
         // tampikan hasil dari "tb_produk"
         return response([
-            "Tampil Detail Produk" => $data
+            "tampildetailproduk" => $data
         ], http_response_code());
     }
 
@@ -227,7 +228,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Laptop
         return response([
-            "Tampil Laptop" => $data
+            "tampillaptop" => $data
         ], http_response_code());
     }
 
@@ -239,7 +240,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Monitor
         return response([
-            "Tampil Monitor" => $data
+            "tampilmonitor" => $data
         ], http_response_code());
     }
 
@@ -251,7 +252,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Keyboard
         return response([
-            "Tampil Keyboard" => $data
+            "tampilkeyboard" => $data
         ], http_response_code());
     }
 
@@ -263,7 +264,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Mouse
         return response([
-            "Tampil Mouse" => $data
+            "tampilmouse" => $data
         ], http_response_code());
     }
 
@@ -275,7 +276,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Printer
         return response([
-            "Tampil Printer" => $data
+            "tampilprinter" => $data
         ], http_response_code());
     }
 
@@ -287,7 +288,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Speaker
         return response([
-            "Tampil Speaker" => $data
+            "tampilspeaker" => $data
         ], http_response_code());
     }
 
@@ -299,7 +300,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Headset
         return response([
-            "Tampil Headset" => $data
+            "tampilheadset" => $data
         ], http_response_code());
     }
 
@@ -311,7 +312,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Catridge
         return response([
-            "Tampil Catridge" => $data
+            "tampilcatridge" => $data
         ], http_response_code());
     } 
 
@@ -323,7 +324,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Hardisk
         return response([
-            "Tampil Hardisk" => $data
+            "tampilhardisk" => $data
         ], http_response_code());
     }
 
@@ -335,7 +336,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Flashdisk
         return response([
-            "Tampil Flashdisk" => $data
+            "tampilflashdisk" => $data
         ], http_response_code());
     }
 
@@ -347,7 +348,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori RAM
         return response([
-            "Tampil RAM" => $data
+            "tampilram" => $data
         ], http_response_code());
     }
 
@@ -359,7 +360,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Powersupply
         return response([
-            "Tampil Powersupply" => $data
+            "tampilpowersupply" => $data
         ], http_response_code());
     }
 
@@ -371,7 +372,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Motherboard
         return response([
-            "Tampil Motherboard" => $data
+            "tampilmotherboard" => $data
         ], http_response_code());
     }
 
@@ -383,7 +384,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Processor
         return response([
-            "Tampil Processor" => $data
+            "tampilprocessor" => $data
         ], http_response_code());
     }
 
@@ -395,7 +396,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Cooler
         return response([
-            "Tampil Cooler" => $data
+            "tampilcooler" => $data
         ], http_response_code());
     }
 
@@ -407,7 +408,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori CasingPC
         return response([
-            "Tampil CasingPC" => $data
+            "tampilcasingpc" => $data
         ], http_response_code());
     }
 
@@ -419,7 +420,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori NetworkAdapter
         return response([
-            "Tampil NetworkAdapter" => $data
+            "tampilnetworkadapter" => $data
         ], http_response_code());
     }
 
@@ -431,7 +432,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per kategori Webcam
         return response([
-            "Tampil Webcam" => $data
+            "tampilwebcam" => $data
         ], http_response_code());
     }
 
@@ -443,7 +444,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek ASUS
         return response([
-            "Tampil Asus" => $data
+            "tampilasus" => $data
         ], http_response_code());
     }
 
@@ -455,7 +456,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek ACER
         return response([
-            "Tampil Acer" => $data
+            "tampilacer" => $data
         ], http_response_code());
     }
 
@@ -467,7 +468,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek Toshiba
         return response([
-            "Tampil Toshiba" => $data
+            "tampiltoshiba" => $data
         ], http_response_code());
     }
 
@@ -479,7 +480,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek MSI
         return response([
-            "Tampil MSI" => $data
+            "tampilmsi" => $data
         ], http_response_code());
     }
 
@@ -491,7 +492,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek Apple
         return response([
-            "Tampil Apple" => $data
+            "tampilapple" => $data
         ], http_response_code());
     }
 
@@ -503,7 +504,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek Samsung
         return response([
-            "Tampil Samsung" => $data
+            "tampilsamsung" => $data
         ], http_response_code());
     }
 
@@ -515,7 +516,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek HP
         return response([
-            "Tampil HP" => $data
+            "tampilhp" => $data
         ], http_response_code());
     }
 
@@ -527,7 +528,7 @@ class Produk extends Controller
 
         // Tampilkan hasil produk per merek Lenovo
         return response([
-            "Tampil Lenovo" => $data
+            "tampillenovo" => $data
         ], http_response_code());
     }
 }

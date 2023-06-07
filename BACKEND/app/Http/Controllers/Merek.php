@@ -19,7 +19,7 @@ class Merek extends Controller
 
         // tampikan hasil dari "tbl_merek"
         return response([
-            "Tampil Merek" => $data
+            "tampilmerek" => $data
         ], http_response_code());
     }
 
@@ -31,7 +31,7 @@ class Merek extends Controller
 
         // tampikan hasil dari "tbl_merek"
         return response([
-            "Tampil Detail Merek" => $data
+            "tampildetailmerek" => $data
         ], http_response_code());
     }
 

@@ -19,7 +19,7 @@ class Kategori extends Controller
 
         // tampikan hasil dari "tbl_kategori"
         return response([
-            "Tampil Kategori" => $data
+            "tampilkategori" => $data
         ], http_response_code());
     }
 
@@ -29,7 +29,7 @@ class Kategori extends Controller
 
         // tampikan hasil dari "tbl_kategori"
         return response([
-            "Tampil detail Kategori" => $data
+            "tampildetailkategori" => $data
         ], http_response_code());
     }
 
