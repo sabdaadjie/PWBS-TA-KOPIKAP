@@ -67,7 +67,7 @@ class MKategori extends Model
         return $query;
     }
 
-    // Update Data Kamar
+    // Update Data Kategori
     function updateDataKategori(
         $Id_Kategori,
         $Nama_Kategori, 

@@ -12,32 +12,32 @@ class Kategori extends Controller
         $this->model = new MKategori();
     }
 
-    // Function Untuk Tampil Data
+    // Function Untuk Tampil Data Kategori
     function tampilkategori()
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari tampilDataKategori(dari MKategori)
         $data = $this->model->tampilDataKategori();
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tbl_kategori"
         return response([
-            "Kategori" => $data
+            "Tampil Kategori" => $data
         ], http_response_code());
     }
 
     function detailKategori($parameter)
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari viewData(dari MKategori)
         $data = $this->model->detailDataKategori($parameter);
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tbl_kategori"
         return response([
-            "Kategori" => $data
+            "Tampil detail Kategori" => $data
         ], http_response_code());
     }
 
     // buat fungsi untuk delete data
     function deleteKategori($parameter)
     {
-        // cek data dari tbl_karyawan
-        //(berdasarkan nik)
+        // cek data dari tbl_kategori
+        //(berdasarkan Id_Kategori)
         $data = $this->model->detailDataKategori($parameter);
 
         // jika data ditemukan
@@ -52,7 +52,7 @@ class Kategori extends Controller
         else {
             // tampilkan pesan data gagal dihapus
             $status = 1;
-            $pesan = "Data Gagal di Hapus ! (NIK tidak ditemukan !)";
+            $pesan = "Data Gagal di Hapus ! (Id_Kategori tidak ditemukan !)";
         }
 
         // tampilkan hasil respon
@@ -73,7 +73,7 @@ class Kategori extends Controller
         );
         // baruu
         $parameter =($data["Id_Kategori"]);
-        // cek apakah data karyawan (nik) sudah pernah tersimpan/belum
+        // cek apakah data Kategori (Id_Kategori) sudah pernah tersimpan/belum
         $check = $this->model->detailDataKategori($parameter);
 
 
@@ -100,7 +100,7 @@ class Kategori extends Controller
         ], http_response_code());
     }
 
-    // Function untuk Update Data Kamar
+    // Function untuk Update Data Kategori
     function updateKategori(
         $parameter,
         Request $req
@@ -111,11 +111,11 @@ class Kategori extends Controller
             "Nama_Kategori" => $req->Nama_Kategori,
         );
 
-        // Cek apakah data kamar tersedia/tidak
+        // Cek apakah data kategori tersedia/tidak
         $cek = $this->model->CekUpdateKategori($parameter, $data["Id_Kategori"]);
         // Jika data tidak ditemukan
         if (count($cek) == 0) {
-            // Ubah data kamar
+            // Ubah data kategori
             $this->model->updateDataKategori(
                 $data["Id_Kategori"],
                 $data["Nama_Kategori"],
@@ -128,7 +128,7 @@ class Kategori extends Controller
         // Jika data tidak ditemukan
         else {
             $status = 0;
-            $pesan = "Data Gagal Diubah ! (Kode_Kamar Sudah Pernah Tersimpan)";
+            $pesan = "Data Gagal Diubah ! (Id_Kategori Sudah Pernah Tersimpan)";
         }
         // Tampilkan pesan
         return response([

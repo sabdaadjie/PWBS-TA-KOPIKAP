@@ -12,34 +12,34 @@ class Merek extends Controller
         $this->model = new MMerek();
     }
 
-    // Function Untuk Tampil Data
+    // Function Untuk Tampil Data merek
     function tampilmerek()
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari tampilDataMerek(dari MNerek)
         $data = $this->model->tampilDataMerek();
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tbl_merek"
         return response([
-            "Merek" => $data
+            "Tampil Merek" => $data
         ], http_response_code());
     }
 
     function detailmerek($parameter)
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari detailDataMerek(dari MNerek)
         $data = $this->model->detailDataMerek($parameter);
 
 
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tbl_merek"
         return response([
-            "Merek" => $data
+            "Tampil Detail Merek" => $data
         ], http_response_code());
     }
 
     // buat fungsi untuk delete data
     function deletemerek($parameter)
     {
-        // cek data dari tbl_karyawan
-        //(berdasarkan nik)
+        // cek data dari tbl_merek
+        //(berdasarkan Id_Merek)
         $data = $this->model->detailDataMerek($parameter);
 
         // jika data ditemukan
@@ -54,7 +54,7 @@ class Merek extends Controller
         else {
             // tampilkan pesan data gagal dihapus
             $status = 1;
-            $pesan = "Data Gagal di Hapus ! (NIK tidak ditemukan !)";
+            $pesan = "Data Gagal di Hapus ! (Id_Merek tidak ditemukan !)";
         }
 
         // tampilkan hasil respon
@@ -75,7 +75,7 @@ class Merek extends Controller
         );
         // baruu
         $parameter =($data["Id_Merek"]);
-        // cek apakah data karyawan (nik) sudah pernah tersimpan/belum
+        // cek apakah data merek (Id_Merek) sudah pernah tersimpan/belum
         $check = $this->model->detailDataMerek($parameter);
 
 
@@ -102,7 +102,7 @@ class Merek extends Controller
         ], http_response_code());
     }
 
-    // Function untuk Update Data Kamar
+    // Function untuk Update Data merek
     function updateMerek($parameter,Request $req)
      {
         // Ambil data hasil input
@@ -111,11 +111,11 @@ class Merek extends Controller
             "Nama_Merek" => $req->Nama_Merek,
         );
 
-        // Cek apakah data kamar tersedia/tidak
+        // Cek apakah data merek tersedia/tidak
         $cek = $this->model->CekUpdateMerek($parameter, $data["Id_Merek"]);
         // Jika data tidak ditemukan
         if (count($cek) == 0) {
-            // Ubah data kamar
+            // Ubah data merek
             $this->model->updateDataMerek(
                 $data["Id_Merek"],
                 $data["Nama_Merek"],
@@ -128,7 +128,7 @@ class Merek extends Controller
         // Jika data tidak ditemukan
         else {
             $status = 0;
-            $pesan = "Data Gagal Diubah ! (Kode_Kamar Sudah Pernah Tersimpan)";
+            $pesan = "Data Gagal Diubah ! (Id_Merek Sudah Pernah Tersimpan)";
         }
         // Tampilkan pesan
         return response([
