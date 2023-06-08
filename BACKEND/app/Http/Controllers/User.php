@@ -12,22 +12,22 @@ class User extends Controller
         $this->model = new MUser();
     }
 
-    // Function Untuk Tampil Data
+    // Function Untuk Tampil Data user
     function tampiluser()
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari tampilDataUser(dari MUser)
         $data = $this->model->tampilDataUser();
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tbl_user"
         return response([
             "User" => $data
         ], http_response_code());
     }
 
     function detailuser($parameter)
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari detailDataUser (dari MUser)
         $data = $this->model->detailDataUser($parameter);
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tbl_user"
         return response([
             "User" => $data
         ], http_response_code());
@@ -36,8 +36,8 @@ class User extends Controller
     // buat fungsi untuk delete data
     function deleteuser($parameter)
     {
-        // cek data dari tbl_karyawan
-        //(berdasarkan nik)
+        // cek data dari tbl_user
+        //(berdasarkan Id_User)
         $data = $this->model->detailDataUser($parameter);
 
         // jika data ditemukan
@@ -52,7 +52,7 @@ class User extends Controller
         else {
             // tampilkan pesan data gagal dihapus
             $status = 1;
-            $pesan = "Data Gagal di Hapus ! (NIK tidak ditemukan !)";
+            $pesan = "Data Gagal di Hapus ! (Id_User tidak ditemukan !)";
         }
 
         // tampilkan hasil respon
@@ -76,7 +76,7 @@ class User extends Controller
         );
         // baruu
         $parameter =($data["Id_User"]);
-        // cek apakah data karyawan (nik) sudah pernah tersimpan/belum
+        // cek apakah data karyawan (Id_User) sudah pernah tersimpan/belum
         $check = $this->model->detailDataUser($parameter);
 
 
@@ -103,7 +103,7 @@ class User extends Controller
         ], http_response_code());
     }
 
-    // Function untuk Update Data Kamar
+    // Function untuk Update Data user
     function updateUser(
         $parameter,
         Request $req
@@ -117,11 +117,11 @@ class User extends Controller
             "role" => $req->role,
         );
 
-        // Cek apakah data kamar tersedia/tidak
+        // Cek apakah data user tersedia/tidak
         $cek = $this->model->CekUpdateUser($parameter, $data["Id_User"]);
         // Jika data tidak ditemukan
         if (count($cek) == 0) {
-            // Ubah data kamar
+            // Ubah data user
             $this->model->updateDataUser(
                 $data["Id_User"],
                 $data["Nama"],
@@ -137,7 +137,7 @@ class User extends Controller
         // Jika data tidak ditemukan
         else {
             $status = 0;
-            $pesan = "Data Gagal Diubah ! (Kode_Kamar Sudah Pernah Tersimpan)";
+            $pesan = "Data Gagal Diubah ! (Id_User Sudah Pernah Tersimpan)";
         }
         // Tampilkan pesan
         return response([

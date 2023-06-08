@@ -19,7 +19,7 @@ class Produk extends Controller
 
         // tampikan hasil dari "tbkaryawan"
         return response([
-            "Produk" => $data
+            "Produk1" => $data
         ], http_response_code());
     }
 
@@ -31,7 +31,7 @@ class Produk extends Controller
  
          // Tampilkan hasil dari "tbl_sewa" join "tbl_users" join "tbl_kamar" join "tbl_pesan"
          return response([
-             "Detail Tampil Data Relasi" => $data
+             "DetailTampilDataRelasi" => $data
          ], http_response_code());
      }
 
@@ -227,7 +227,7 @@ class Produk extends Controller
 
         // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
         return response([
-            "Tampil Laptop" => $data
+            "TampilLaptop" => $data
         ], http_response_code());
     }
 
@@ -239,7 +239,7 @@ class Produk extends Controller
 
         // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
         return response([
-            "Tampil Monitor" => $data
+            "TampilMonitor" => $data
         ], http_response_code());
     }
 
@@ -443,7 +443,7 @@ class Produk extends Controller
 
         // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
         return response([
-            "Tampil Asus" => $data
+            "TampilAsus" => $data
         ], http_response_code());
     }
 
