@@ -1518,7 +1518,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 15px;
     margin: 0; }
   .single-product .product-details .price .l-through {
-    text-decoration: line-through;
+    /* text-decoration: line-through; */
     color: #cccccc;
     margin-bottom: 0; }
   .single-product .product-details .prd-bottom {
@@ -1702,7 +1702,7 @@ h1, h2, h3, h4, h5, h6 {
       padding-right: 15px;
       margin-bottom: 15px; }
     .exclusive-deal-area .exclusive-right .product-details .price .l-through {
-      text-decoration: line-through;
+      /* text-decoration: line-through; */
       color: #cccccc;
       margin-bottom: 0; }
     .exclusive-deal-area .exclusive-right .product-details .add-bag {
@@ -1743,7 +1743,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 10px;
     margin-bottom: 0px; }
   .single-related-product .price .l-through {
-    text-decoration: line-through;
+    /* text-decoration: line-through; */
     color: #cccccc;
     margin-bottom: 0; }
   .single-related-product a {
