@@ -14,42 +14,43 @@ class Produk extends Controller
 
     // Function Untuk Tampil Data
     function tampil()
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari tampilData(dari MProduk)
         $data = $this->model->tampilData();
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tbl_produk"
         return response([
-            "Produk1" => $data
+            "tampilproduk" => $data
         ], http_response_code());
     }
 
-     // Function untuk view detail data tbl_pesan join tbl_users join tbl_kamar join tbl_pesan
+     // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
      function tampilRelasi()
      {
-         // ambil function viewDataSewaJoin dari SewaModel
+         // ambil function tampilRelasiDataProduk dari MProduk
          $data = $this->model->tampilRelasiDataProduk();
  
-         // Tampilkan hasil dari "tbl_sewa" join "tbl_users" join "tbl_kamar" join "tbl_pesan"
+         // Tampilkan hasil dari "tbl_produk" join "tbl_kategori" join "tbl_merek"
          return response([
-             "DetailTampilDataRelasi" => $data
+             "detailtampilrelasi" => $data
          ], http_response_code());
      }
 
+    //  Fungsi untuk tampil data per Id/data
     function detail($parameter)
-    {   // ambil fungsi dari viewData(dari Mkaryawan)
+    {   // ambil fungsi dari detailData(dari MProduk)
         $data = $this->model->detailData($parameter);
 
-        // tampikan hasil dari "tbkaryawan"
+        // tampikan hasil dari "tb_produk"
         return response([
-            "Produk" => $data
+            "tampildetailproduk" => $data
         ], http_response_code());
     }
 
     // buat fungsi untuk delete data
     function delete($parameter)
     {
-        // cek data dari tbl_karyawan
-        //(berdasarkan nik)
+        // cek data dari tbl_produk
+        //(berdasarkan Id_Produk)
         $data = $this->model->detailData($parameter);
 
         // jika data ditemukan
@@ -64,7 +65,7 @@ class Produk extends Controller
         else {
             // tampilkan pesan data gagal dihapus
             $status = 1;
-            $pesan = "Data Gagal di Hapus ! (NIK tidak ditemukan !)";
+            $pesan = "Data Gagal di Hapus ! (Id_Produk tidak ditemukan !)";
         }
 
         // tampilkan hasil respon
@@ -92,7 +93,7 @@ class Produk extends Controller
         );
         // baruu
         $parameter =($data["Id_Produk"]);
-        // cek apakah data karyawan (nik) sudah pernah tersimpan/belum
+        // cek apakah data produk (Id_Produk) sudah pernah tersimpan/belum
         $check = $this->model->detailData($parameter);
 
 
@@ -129,7 +130,7 @@ class Produk extends Controller
             "Harga" => $req->Harga,
             "Stok_Produk" => $req->Stok_Produk,
             "Spesifikasi" => $req->Spesifikasi,
-            "Foto_Produk" => $req->file('Foto_Produk')->store('public/gambar'),
+            "Foto_Produk" => $req->file('Foto_Produk')->move('foto'),
             "Kategori" => $req->Kategori,
             "Merek" => $req->Merek,
 
@@ -138,7 +139,7 @@ class Produk extends Controller
 
         // baruu
         $parameter =($data["Id_Produk"]);
-        // cek apakah data karyawan (nik) sudah pernah tersimpan/belum
+        // cek apakah data produk (Id_Produk) sudah pernah tersimpan/belum
         $check = $this->model->detailData($parameter);
 
 
@@ -169,7 +170,7 @@ class Produk extends Controller
         // return ["result"=>$result];
     }
 
-    // Function untuk Update Data Kamar
+    // Function untuk Update Data Produk
     function updateProduk(
         $parameter,
         Request $req
@@ -186,11 +187,11 @@ class Produk extends Controller
             "Merek" => $req->Merek,
         );
 
-        // Cek apakah data kamar tersedia/tidak
+        // Cek apakah data Produk tersedia/tidak
         $cek = $this->model->checkUpdate($parameter, $data["Id_Produk"]);
         // Jika data tidak ditemukan
         if (count($cek) == 0) {
-            // Ubah data kamar
+            // Ubah data produk
             $this->model->updateData(
                 $data["Id_Produk"],
                 $data["Nama_Produk"],
@@ -209,7 +210,7 @@ class Produk extends Controller
         // Jika data tidak ditemukan
         else {
             $status = 0;
-            $pesan = "Data Gagal Diubah ! (Kode_Kamar Sudah Pernah Tersimpan)";
+            $pesan = "Data Gagal Diubah ! (Id_Produk Sudah Pernah Tersimpan)";
         }
         // Tampilkan pesan
         return response([
@@ -219,315 +220,315 @@ class Produk extends Controller
     }
 
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori laptop
     function tampillaptop()
     {
         // ambil function tampilLaptop dari MProduk
         $data = $this->model->tampilLaptop();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Laptop
         return response([
-            "TampilLaptop" => $data
+            "tampillaptop" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori monitor
     function tampilmonitor()
     {
         // ambil function tampilMonitor dari MProduk
         $data = $this->model->tampilMonitor();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Monitor
         return response([
-            "TampilMonitor" => $data
+            "tampilmonitor" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori keyboard
     function tampilkeyboard()
     {
         // ambil function tampilKeyboard dari MProduk
         $data = $this->model->tampilKeyboard();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Keyboard
         return response([
-            "Tampil Keyboard" => $data
+            "tampilkeyboard" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori mouse
     function tampilmouse()
     {
         // ambil function tampilMouse dari MProduk
         $data = $this->model->tampilMouse();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Mouse
         return response([
-            "Tampil Mouse" => $data
+            "tampilmouse" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori printer
     function tampilprinter()
     {
         // ambil function tampilPrinter dari MProduk
         $data = $this->model->tampilPrinter();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Printer
         return response([
-            "Tampil Printer" => $data
+            "tampilprinter" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori speaker
     function tampilspeaker()
     {
         // ambil function tampilSpeaker dari MProduk
         $data = $this->model->tampilSpeaker();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Speaker
         return response([
-            "Tampil Speaker" => $data
+            "tampilspeaker" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori headset
     function tampilheadset()
     {
         // ambil function tampilHeadset dari MProduk
         $data = $this->model->tampilHeadset();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Headset
         return response([
-            "Tampil Headset" => $data
+            "tampilheadset" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori catridge
     function tampilcatridge()
     {
         // ambil function tampilCatridge dari MProduk
         $data = $this->model->tampilCatridge();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Catridge
         return response([
-            "Tampil Catridge" => $data
+            "tampilcatridge" => $data
         ], http_response_code());
     } 
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori hardisk
     function tampilhardisk()
     {
         // ambil function tampilHardisk dari MProduk
         $data = $this->model->tampilHardisk();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Hardisk
         return response([
-            "Tampil Hardisk" => $data
+            "tampilhardisk" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori flashdisk
     function tampilflashdisk()
     {
         // ambil function tampilFlashdisk dari MProduk
         $data = $this->model->tampilFlashdisk();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Flashdisk
         return response([
-            "Tampil Flashdisk" => $data
+            "tampilflashdisk" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori RAM
     function tampilram()
     {
         // ambil function tampilRAM dari MProduk
         $data = $this->model->tampilRAM();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori RAM
         return response([
-            "Tampil RAM" => $data
+            "tampilram" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori powersupply
     function tampilpowersupply()
     {
         // ambil function tampilPowersupply dari MProduk
         $data = $this->model->tampilPowersupply();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Powersupply
         return response([
-            "Tampil Powersupply" => $data
+            "tampilpowersupply" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori motherboard
     function tampilmotherboard()
     {
         // ambil function tampilMotherboard dari MProduk
         $data = $this->model->tampilMotherboard();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Motherboard
         return response([
-            "Tampil Motherboard" => $data
+            "tampilmotherboard" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori processor
     function tampilprocessor()
     {
         // ambil function tampilProcessor dari MProduk
         $data = $this->model->tampilProcessor();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Processor
         return response([
-            "Tampil Processor" => $data
+            "tampilprocessor" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori cooler
     function tampilcooler()
     {
         // ambil function tampilCooler dari MProduk
         $data = $this->model->tampilCooler();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Cooler
         return response([
-            "Tampil Cooler" => $data
+            "tampilcooler" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori casingpc
     function tampilcasingpc()
     {
         // ambil function tampilCasingPC dari MProduk
         $data = $this->model->tampilCasingPC();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori CasingPC
         return response([
-            "Tampil CasingPC" => $data
+            "tampilcasingpc" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori networkadapter
     function tampilnetworkadapter()
     {
         // ambil function tampilNetworkAdapter dari MProduk
         $data = $this->model->tampilNetworkAdapter();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori NetworkAdapter
         return response([
-            "Tampil NetworkAdapter" => $data
+            "tampilnetworkadapter" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per kategori webcam
     function tampilwebcam()
     {
         // ambil function tampilWebcam dari MProduk
         $data = $this->model->tampilWebcam();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per kategori Webcam
         return response([
-            "Tampil Webcam" => $data
+            "tampilwebcam" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek asus 
     function tampilasus()
     {
         // ambil function tampilAsus dari MProduk
         $data = $this->model->tampilAsus();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek ASUS
         return response([
-            "TampilAsus" => $data
+            "tampilasus" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek acer
     function tampilacer()
     {
         // ambil function tampilAcer dari MProduk
         $data = $this->model->tampilAcer();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek ACER
         return response([
-            "Tampil Acer" => $data
+            "tampilacer" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek toshiba
     function tampiltoshiba()
     {
         // ambil function tampilToshiba dari MProduk
         $data = $this->model->tampilToshiba();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek Toshiba
         return response([
-            "Tampil Toshiba" => $data
+            "tampiltoshiba" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek MSI
     function tampilmsi()
     {
         // ambil function tampilMSI dari MProduk
         $data = $this->model->tampilMSI();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek MSI
         return response([
-            "Tampil MSI" => $data
+            "tampilmsi" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek apple
     function tampilapple()
     {
         // ambil function tampilApple dari MProduk
         $data = $this->model->tampilApple();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek Apple
         return response([
-            "Tampil Apple" => $data
+            "tampilapple" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek samsung
     function tampilsamsung()
     {
         // ambil function tampilSamsung dari MProduk
         $data = $this->model->tampilSamsung();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek Samsung
         return response([
-            "Tampil Samsung" => $data
+            "tampilsamsung" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek HP
     function tampilhp()
     {
         // ambil function tampilHP dari MProduk
         $data = $this->model->tampilHP();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek HP
         return response([
-            "Tampil HP" => $data
+            "tampilhp" => $data
         ], http_response_code());
     }
 
-    // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
+    // Function untuk tampil produk per merek Lenovo
     function tampillenovo()
     {
         // ambil function tampilLenovo dari MProduk
         $data = $this->model->tampilLenovo();
 
-        // Tampilkan hasil dari tbl_produk join tbl_kategori join tbl_merek
+        // Tampilkan hasil produk per merek Lenovo
         return response([
-            "Tampil Lenovo" => $data
+            "tampillenovo" => $data
         ], http_response_code());
     }
 }

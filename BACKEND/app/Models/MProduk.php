@@ -10,6 +10,7 @@ class MProduk extends Model
 {
     protected $table ='tbl_produk';
 
+    // buat fungsi tambah data produk
     function tampilData()
     {
     $query = DB::table('tbl_produk')
@@ -29,7 +30,7 @@ class MProduk extends Model
         return $query;
     }
 
-    // Tampil Data tbl_produk Join tb_users join tbl_kamar join tbl_pesan
+    // Tampil Data tbl_produk Join tb_produk join tbl_kategori join tbl_merek
     function tampilRelasiDataProduk()
     {
         $query = DB::table('tbl_produk')
@@ -43,6 +44,7 @@ class MProduk extends Model
         return $query;
     }
 
+    // buat fungsi detail data produk
     function detailData($parameter){
         $query = DB::table('tbl_produk')
         ->select(
@@ -62,7 +64,7 @@ class MProduk extends Model
         return $query;
     }
 
-    // buat fungsi delete data
+    // buat fungsi delete data produk
     function deleteData($parameter)
     {
         DB::table("tbl_produk")
@@ -70,7 +72,7 @@ class MProduk extends Model
             ->delete();
     }
     
-    // buat fungsi tambah data
+    // buat fungsi tambah data produk
     function saveData($Id_produk, $Nama_Produk, $Harga, $Stok_Produk, $Spesifikasi, $Foto_Produk,$Kategori, $Merek)
     {
         DB::table("tbl_produk")
@@ -86,10 +88,10 @@ class MProduk extends Model
         ]);
     }
 
-    // Fungsi Untuk Cek Ubah Data
+    // Fungsi Untuk Cek Ubah Data produk
     function checkUpdate($Id_Produk_Lama, $Id_Produk_baru)
     {
-        // tampilkan data
+        // tampilkan data 
         $query = DB::table("tbl_produk")
             ->select("Id_Produk")
             ->where("Id_Produk", "=", $Id_Produk_baru)
@@ -99,7 +101,7 @@ class MProduk extends Model
         return $query;
     }
 
-    // Update Data Kamar
+    // Update Data Produk
     function updateData(
         $Id_Produk,
         $Nama_Produk, 

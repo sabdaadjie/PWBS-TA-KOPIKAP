@@ -12,46 +12,39 @@ class Produk extends Controller
         $this->model = new MProduk();
     }
 
-    // Function Untuk Tampil Data
-    function tampil()
-    {   // ambil fungsi dari tampilData(dari MProduk)
-        $data = $this->model->tampilData();
+    // Function Untuk Tampil Data merek
+    function tampilmerek()
+    {   // ambil fungsi dari tampilDataMerek(dari MNerek)
+        $data = $this->model->tampilDataMerek();
 
-        // tampikan hasil dari "tbl_produk"
+        // tampikan hasil dari "tbl_merek"
         return response([
-            "tampilproduk" => $data
+            "tampilmerek" => $data
         ], http_response_code());
     }
 
-     // Function untuk view detail data tbl_produk join tbl_kategori join tbl_merek
-     function tampilRelasi()
-     {
-         // ambil function tampilRelasiDataProduk dari MProduk
-         $data = $this->model->tampilRelasiDataProduk();
- 
-         // Tampilkan hasil dari "tbl_produk" join "tbl_kategori" join "tbl_merek"
-         return response([
-             "detailtampilrelasi" => $data
-         ], http_response_code());
-     }
+    function detailmerek($parameter)
+    {   // ambil fungsi dari detailDataMerek(dari MNerek)
+        $data = $this->model->detailDataMerek($parameter);
 
     //  Fungsi untuk tampil data per Id/data
     function detail($parameter)
     {   // ambil fungsi dari detailData(dari MProduk)
         $data = $this->model->detailData($parameter);
 
-        // tampikan hasil dari "tb_produk"
+
+        // tampikan hasil dari "tbl_merek"
         return response([
-            "tampildetailproduk" => $data
+            "tampildetailmerek" => $data
         ], http_response_code());
     }
 
     // buat fungsi untuk delete data
     function delete($parameter)
     {
-        // cek data dari tbl_produk
-        //(berdasarkan Id_Produk)
-        $data = $this->model->detailData($parameter);
+        // cek data dari tbl_merek
+        //(berdasarkan Id_Merek)
+        $data = $this->model->detailDataMerek($parameter);
 
         // jika data ditemukan
         if (count($data) != 0) {
@@ -65,7 +58,7 @@ class Produk extends Controller
         else {
             // tampilkan pesan data gagal dihapus
             $status = 1;
-            $pesan = "Data Gagal di Hapus ! (Id_Produk tidak ditemukan !)";
+            $pesan = "Data Gagal di Hapus ! (Id_Merek tidak ditemukan !)";
         }
 
         // tampilkan hasil respon
@@ -92,9 +85,9 @@ class Produk extends Controller
 
         );
         // baruu
-        $parameter =($data["Id_Produk"]);
-        // cek apakah data produk (Id_Produk) sudah pernah tersimpan/belum
-        $check = $this->model->detailData($parameter);
+        $parameter =($data["Id_Merek"]);
+        // cek apakah data merek (Id_Merek) sudah pernah tersimpan/belum
+        $check = $this->model->detailDataMerek($parameter);
 
 
         // jika data tidak ditemukan
@@ -120,10 +113,10 @@ class Produk extends Controller
         ], http_response_code());
     }
 
-    // buat function untuk insert data
-    function uploadgambar(Request $req)
-    {
-        // ambil data hasil input
+    // Function untuk Update Data merek
+    function updateMerek($parameter,Request $req)
+     {
+        // Ambil data hasil input
         $data = array(
             "Id_Produk" => $req->Id_Produk,
             "Nama_Produk" => $req->Nama_Produk,
@@ -136,71 +129,14 @@ class Produk extends Controller
 
         );
 
-
-        // baruu
-        $parameter =($data["Id_Produk"]);
-        // cek apakah data produk (Id_Produk) sudah pernah tersimpan/belum
-        $check = $this->model->detailData($parameter);
-
-
-        // jika data tidak ditemukan
-        if (count($check) == 0) {
-            // lakukan proses penyimpanan
-            $this->model->saveData($data["Id_Produk"], $data["Nama_Produk"], $data["Harga"], $data["Stok_Produk"], $data["Spesifikasi"], $data["Foto_Produk"],$data
-            ["Kategori"], $data["Merek"]);
-            // buat pesan dan status hasil penyimpanan data
-            $status = 1;
-            $pesan = "Data Berhasil disimpan";
-        }
-        // jika data tidak ditemukan
-        else {
-
-            // tampilkan pesan data gagal disimpan
-            $status = 0;
-            $pesan = "Data Gagal disimpan";
-        }
-        // tampilkan hasil respon
-
-        return response([
-            "status" => $status,
-            "pesan" => $pesan
-        ], http_response_code());
-
-        // $result = $req->file('Foto_Produk')->store('public/img');
-        // return ["result"=>$result];
-    }
-
-    // Function untuk Update Data Produk
-    function updateProduk(
-        $parameter,
-        Request $req
-    ) {
-        // Ambil data hasil input
-        $data = array(
-            "Id_Produk" => $req->Id_Produk,
-            "Nama_Produk" => $req->Nama_Produk,
-            "Harga" => $req->Harga,
-            "Stok_Produk" => $req->Stok_Produk,
-            "Spesifikasi" => $req->Spesifikasi,
-            "Foto_Produk" => $req->Foto_Produk,
-            "Kategori" => $req->Kategori,
-            "Merek" => $req->Merek,
-        );
-
-        // Cek apakah data Produk tersedia/tidak
-        $cek = $this->model->checkUpdate($parameter, $data["Id_Produk"]);
+        // Cek apakah data merek tersedia/tidak
+        $cek = $this->model->CekUpdateMerek($parameter, $data["Id_Merek"]);
         // Jika data tidak ditemukan
         if (count($cek) == 0) {
-            // Ubah data produk
-            $this->model->updateData(
-                $data["Id_Produk"],
-                $data["Nama_Produk"],
-                $data["Harga"],
-                $data["Stok_Produk"],
-                $data["Spesifikasi"],
-                $data["Foto_Produk"],
-                $data["Kategori"],
-                $data["Merek"],
+            // Ubah data merek
+            $this->model->updateDataMerek(
+                $data["Id_Merek"],
+                $data["Nama_Merek"],
                 $parameter
             );
             // tampilkan pesan
@@ -210,7 +146,7 @@ class Produk extends Controller
         // Jika data tidak ditemukan
         else {
             $status = 0;
-            $pesan = "Data Gagal Diubah ! (Id_Produk Sudah Pernah Tersimpan)";
+            $pesan = "Data Gagal Diubah ! (Id_Merek Sudah Pernah Tersimpan)";
         }
         // Tampilkan pesan
         return response([

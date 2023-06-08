@@ -67,7 +67,7 @@ Route::get('/detailmerek/{parameter}', [Merek::class, 'detailmerek']);
 Route::delete('/deletemerek/{parameter}', [Merek::class, 'deletemerek']);
 // Route Untuk tambah data merek
 Route::post('/insertmerek', [Merek::class, 'insertmerek']);
-// Route untuk update data kategori
+// Route untuk update data merek
 Route::put('/updateMerek/{parameter}', [Merek::class, 'updateMerek']);
 
 // Route untuk tampil data user

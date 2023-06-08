@@ -67,7 +67,7 @@ class MMerek extends Model
         return $query;
     }
 
-    // Update Data Kamar
+    // Update Data merek
     function updateDataMerek(
         $Id_Merek,
         $Nama_Merek, 
