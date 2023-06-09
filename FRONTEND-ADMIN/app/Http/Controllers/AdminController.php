@@ -27,15 +27,50 @@ class AdminController extends Controller
 
         $data["result"] = json_decode($response);
 
-        // panggil view "dashboard"
+        // panggil view "home"
 
-        return view("dashboard",$data);
+        return view("home",$data);
     }
 
-    function add()
+    public function dashboard()
+    {
+        // menampilkan halaman dashboard
+        return view('layout.dashboard');
+    }
+    
+    function user()
     {
         // tampilkan view "vw_user"
         return view("vw_user");
+
+    }
+
+    function produk()
+    {
+        // tampilkan view "vw_produk"
+        return view("vw_produk");
+
+    }
+    
+    function kategori()
+    {
+        // tampilkan view "vw_kategori"
+        return view("vw_kategori");
+
+    }
+    
+    function merk()
+    {
+        // tampilkan view "vw_merk"
+        return view("vw_merk");
+
+    }
+    
+    function profile()
+    {
+        // tampilkan view "vw_profile"
+        return view("vw_profile");
+
     }
     
 }

@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('layout.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li> 
@@ -39,22 +39,22 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" onclick="gotoAdd()">User</a>
+                <a class="collapse-item" onclick="user()">User</a>
             </div>
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Produk</a>
+                <a class="collapse-item" onclick="produk()">Produk</a>
             </div>
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Kategori Produk</a>
+                <a class="collapse-item" onclick="kategori()">Kategori Produk</a>
             </div>
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Merk Produk</a>
+                <a class="collapse-item" onclick="merk()">Merk Produk</a>
             </div>
         </div>
     </li>
@@ -87,7 +87,7 @@
 
 
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{ route('profile') }}">
             <i class="fas fa-fw fa-user"></i>
             <span>Profile</span></a>
     </li>
@@ -102,9 +102,16 @@
 </ul>
 
 <script>
-    // Buat Fungsi Untuk Link Tambah Data
-    function gotoAdd() {
-                location.href = '{{ url('/add') }}';
-            }
+    // Buat Fungsi Untuk view user
+    function user() {location.href = '{{ url('/user') }}';}
+
+    // Buat Fungsi Untuk view produk
+    function produk() {location.href = '{{ url('/produk') }}';}
+    
+    // Buat Fungsi Untuk view kategori
+    function kategori() {location.href = '{{ url('/kategori') }}';}
+    
+    // Buat Fungsi Untuk view kategori
+    function merk() {location.href = '{{ url('/merk') }}';}
 
 </script>

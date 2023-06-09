@@ -15,11 +15,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('home');
 });
 
-// Route untuk tambah data
-Route::get("/add", [AdminController::class, 'add']);
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('layout.dashboard');
 
-// Route untuk View User
-Route::get("/vw_user", [AdminController::class, 'vw_user']);
+// Route untuk panggil view user
+Route::get("/user", [AdminController::class, 'user']);
+
+// Route untuk panggil view produk
+Route::get("/produk", [AdminController::class, 'produk']);
+
+// Route untuk panggil view kategori
+Route::get("/kategori", [AdminController::class, 'kategori']);
+
+// Route untuk panggil view merk
+Route::get("/merk", [AdminController::class, 'merk']);
+
+// Route untuk panggil view profile
+Route::get("/profile", [AdminController::class, 'profile'])->name('profile');
