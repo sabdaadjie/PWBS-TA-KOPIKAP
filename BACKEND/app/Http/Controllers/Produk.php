@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MProduk;
+use GuzzleHttp\Promise\Create;
+use Illuminate\Support\Facades\Storage;
 
 class Produk extends Controller
 {
@@ -130,13 +132,21 @@ class Produk extends Controller
             "Harga" => $req->Harga,
             "Stok_Produk" => $req->Stok_Produk,
             "Spesifikasi" => $req->Spesifikasi,
-            "Foto_Produk" => $req->file('Foto_Produk')->move('foto'),
+            "Foto_Produk" => $req->file('Foto_Produk')->store('img','public'),
             "Kategori" => $req->Kategori,
             "Merek" => $req->Merek,
 
         );
 
+        // $data["Foto_Produk"] = $req->file('Foto_Produk')->store('foto','public');
+        // $Foto_Produk = $req->file('Foto_Produk')->getClientOriginalName();
+        // $url_image = Storage::disk('public')->url($Foto_Produk);
+        // $file = $req->file('Foto_Produk');
 
+        // $nama_file = time()."_".$file->getClientOriginalName();
+
+        // $tujuan_file = 'foto';
+        // $file->move($tujuan_file,$nama_file);
         // baruu
         $parameter =($data["Id_Produk"]);
         // cek apakah data produk (Id_Produk) sudah pernah tersimpan/belum
@@ -150,7 +160,8 @@ class Produk extends Controller
             ["Kategori"], $data["Merek"]);
             // buat pesan dan status hasil penyimpanan data
             $status = 1;
-            $pesan = "Data Berhasil disimpan";
+            $pesan =
+             "Data Berhasil disimpan";
         }
         // jika data tidak ditemukan
         else {
@@ -530,6 +541,14 @@ class Produk extends Controller
         return response([
             "tampillenovo" => $data
         ], http_response_code());
+    }
+
+    
+
+    // buat fungsi search
+    public function search($Nama_Produk)
+    {
+        return MProduk::where("Nama_Produk","like","%".$Nama_Produk."%")->get();
     }
 }
 
