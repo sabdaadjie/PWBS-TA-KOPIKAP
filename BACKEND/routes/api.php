@@ -33,12 +33,17 @@ Route::delete('/delete/{parameter}', [Produk::class, 'delete']);
 Route::post('/insert', [Produk::class, 'insert']);
 // Route Untuk tambah data produk
 Route::post('/uploadgambar', [Produk::class, 'uploadgambar']);
+// Route Untuk tambah data produk
+Route::post('/tampildata', [Produk::class, 'tampildata']);
 // Route untuk update data produk
 Route::put('/updateProduk/{parameter}', [Produk::class, 'updateProduk']);
+// Route Untuk detail produk
+Route::get('/detail/{parameter}', [Produk::class, 'detail']);
+
+// Route untuk PENCARIAN
+Route::get('/search/{Nama_Produk}', [Produk::class, 'search']);
 
 
-// Route untuk tampil data kategori
-Route::get('/tampilkategori', [Kategori::class, 'tampilkategori']);
 // Route untuk tampil data kategori
 Route::get('/detailkategori/{parameter}', [Kategori::class, 'detailkategori']); 
 // Route Untuk hapus data kategori
