@@ -94,7 +94,7 @@
   --bs-tertiary-bg-rgb: 248, 249, 250;
   --bs-heading-color: inherit;
   --bs-link-color: #0d6efd;
-  --bs-link-color-rgb: 13, 110, 253;
+  --bs-link-color : #000000;
   --bs-link-decoration: underline;
   --bs-link-hover-color: #0a58ca;
   --bs-link-hover-color-rgb: 10, 88, 202;
@@ -344,8 +344,9 @@ sup {
   top: -0.5em;
 }
 
+/* ganti warna link href */
 a {
-  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  color: rgba(var(--bs-link-color), var(--bs-link-opacity, 1));
   /* text-decoration: underline; */
 }
 a:hover {

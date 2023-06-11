@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get("/", [ViewUser::class, 'brand']);
 
 // Route untuk kategori
 Route::get("kategori", [ViewUser::class, 'kategori']);
@@ -29,3 +28,9 @@ Route::get("about", [ViewUser::class, 'about']);
 
 // Route untuk contact
 Route::get("contact", [ViewUser::class, 'contact']);
+
+
+//route untuk detail data user
+Route::get('show/{parameter}', [ViewUser::class, 'show'])->name('show/{parameter}');
+
+Route::get('search', [ViewUser::class, 'search'])->name('search');

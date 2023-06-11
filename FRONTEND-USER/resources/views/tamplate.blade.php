@@ -81,13 +81,14 @@
       </nav>
     </div>
     <div class="search_input" id="search_input_box">
-      <div class="container">
-        <form class="d-flex justify-content-between">
-          <input type="text" class="form-control" id="search_input" placeholder="Search Here" />
-          <button type="submit" class="btn"></button>
-          <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-        </form>
-      </div>
+  <div class="container">
+    <form class="d-flex justify-content-between" action="/" method="GET" id="search_form">
+      <input type="text" class="form-control" id="search_input" name="Nama_Produk" placeholder="Search Here" />
+      <button type="submit" class="btn"></button>
+      <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+    </form>
+  </div>
+</div>
     </div>
   </header>
   <!-- End Header Area -->
@@ -142,6 +143,16 @@
   <script src="{{ asset('js/gmaps.min.js') }}"></script>
   <script src="{{ asset('js/main.js') }}"></script>
   <script src="{{ asset('bootstrap530/js/bootstrap.js') }}"></script>
+  <script>
+  document.getElementById("search_form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Mencegah form melakukan aksi default (refresh halaman)
+
+    var keyword = document.getElementById("search_input").value;
+    var url = "{{ url('search') }}" + "?Nama_Produk=" + keyword; // Menambahkan parameter pencarian ke URL
+
+    window.location.href = url; // Mengarahkan ke URL hasil pencarian
+  });
+</script>
 </body>
 
 </html>

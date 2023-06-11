@@ -234,41 +234,33 @@
                 <div class="col-lg-6 text-center">
                     <div class="section-title">
                         <h1>LAPTOP</h1>
-                        <p>Temukan Laptop Pilihan mu.</p>
+                        <p>Temukan Laptop Pilihan Kamu</p>
                     </div>
                 </div>
             </div>
             <div class="row">
+                <!-- Tampil Laptop -->
                 <?php $count = 0; ?>
-                @foreach ($result1->TampilLaptop as $output)
-                <?php if ($count == 12) break; ?>
+                @foreach ($result2->tampillaptop as $output)
+                <?php if ($count == 8) break; ?>
                 <!-- single product -->
                 <div class="col-lg-3 col-md-6">
                     <div class="single-product">
+                        <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
                         <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                        </a>
                         <div class="product-details">
-                            <h6>{{ $output->Nama_Produk}}</h6>
+                            <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                             <div class="price">
+                            <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
+                                <br>
                                 <small class="l-through">Spesifikasi :</small>
-                                <!-- <small class="l-through">{{ $output->Nama_Kategori}}</small> -->
                             </div>
                             <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                             <div class="prd-bottom">
                                 <a href="" class="social-info">
-                                    <span class="ti-bag"></span>
-                                    <p class="hover-text">add to bag</p>
-                                </a>
-                                <a href="" class="social-info">
-                                    <span class="lnr lnr-heart"></span>
-                                    <p class="hover-text">Wishlist</p>
-                                </a>
-                                <a href="" class="social-info">
-                                    <span class="lnr lnr-sync"></span>
-                                    <p class="hover-text">compare</p>
-                                </a>
-                                <a href="" class="social-info">
-                                    <span class="lnr lnr-move"></span>
-                                    <p class="hover-text">view more</p>
+                                    <span class="fa fa-whatsapp"></span>
+                                    <p class="hover-text">bagikan</p>
                                 </a>
                             </div>
                         </div>
@@ -287,46 +279,40 @@
                     <div class="section-title">
                         <h1>MONITOR</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Temukan Monitor Pilihan Kamu
                         </p>
                     </div>
                 </div>
             </div>
             <div class="row">
-
+                <?php $count = 0; ?>
+                @foreach ($result3->tampilmonitor as $output)
+                <?php if ($count == 8) break; ?>
                 <!-- single product -->
                 <div class="col-lg-3 col-md-6">
                     <div class="single-product">
-                        <img class="img-fluid" src="/img/product/p6.jpg" alt="" />
+                        <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
+                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                        </a>
                         <div class="product-details">
-                            <h6>{{ $output->Nama_Produk}}</h6>
+                            <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                             <div class="price">
-                                <h6>$150.00</h6>
-                                <h6 class="l-through">$210.00</h6>
+                            <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
+                                <br>
+                                <small class="l-through">Spesifikasi :</small>
                             </div>
+                            <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                             <div class="prd-bottom">
                                 <a href="" class="social-info">
-                                    <span class="ti-bag"></span>
-                                    <p class="hover-text">add to bag</p>
-                                </a>
-                                <a href="" class="social-info">
-                                    <span class="lnr lnr-heart"></span>
-                                    <p class="hover-text">Wishlist</p>
-                                </a>
-                                <a href="" class="social-info">
-                                    <span class="lnr lnr-sync"></span>
-                                    <p class="hover-text">compare</p>
-                                </a>
-                                <a href="" class="social-info">
-                                    <span class="lnr lnr-move"></span>
-                                    <p class="hover-text">view more</p>
+                                    <span class="fa fa-whatsapp"></span>
+                                    <p class="hover-text">bagikan</p>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <?php $count++; ?>
+                @endforeach
             </div>
         </div>
     </div>
@@ -358,50 +344,127 @@
 <!--================Blog Categorie Area =================-->
 
 <!-- Semua Produk -->
+<!-- Semua Produk -->
 <section class="section_gap_top container">
     <div class="section-title text-center">
         <h1>Semua Produk</h1>
     </div>
-    <div class="row section_gap_top">
-       
-
+    <div id="productList" class="row section_gap_top">
         <!-- single product -->
-        @foreach ($result2->TampilAsus as $output)
-        
-        <div class="col-lg-3 col-md-6">
-            <div class="single-product">
-                <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
-                <div class="product-details">
-                    <h6>{{ $output->Nama_Produk}}</h6>
-                    <div class="price">
-                        <h6>$150.00</h6>
-                        <h6 class="l-through">$210.00</h6>
-                    </div>
-                    <div class="prd-bottom">
-                        <a href="" class="social-info">
-                            <span class="ti-bag"></span>
-                            <p class="hover-text">add to bag</p>
-                        </a>
-                        <a href="" class="social-info">
-                            <span class="lnr lnr-heart"></span>
-                            <p class="hover-text">Wishlist</p>
-                        </a>
-                        <a href="" class="social-info">
-                            <span class="lnr lnr-sync"></span>
-                            <p class="hover-text">compare</p>
-                        </a>
-                        <a href="" class="social-info">
-                            <span class="lnr lnr-move"></span>
-                            <p class="hover-text">view more</p>
-                        </a>
+        <?php $count = 0; ?>
+        @foreach ($result1->detailtampilrelasi as $output)
+            <?php if ($count == 12) break; ?>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-product">
+                    <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
+                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                    </a>
+                    <div class="product-details">
+                        <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
+                        <div class="price">
+                            <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
+                            <br>
+                            <small class="l-through">Spesifikasi :</small>
+                        </div>
+                        <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
+                        <div class="prd-bottom">
+                            <a href="" class="social-info">
+                                <span class="fa fa-whatsapp"></span>
+                                <p class="hover-text">bagikan</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+            <?php $count++; ?>
         @endforeach
     </div>
-    </div>
+
+    <!-- Tombol Load More -->
+    <div class="text-center">
+        <button id="loadMoreBtn" class="btn btn-primary">Load More</button>
     </div>
 </section>
+
+<script>
+    // Variabel untuk melacak jumlah produk yang telah dimuat
+    let loadedProducts = <?php echo $count; ?>;
+
+    // Fungsi untuk memuat produk selanjutnya
+    function loadMoreProducts() {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.textContent = 'Loading...';
+
+        // Lakukan pemanggilan Ajax untuk memuat data produk selanjutnya dari server
+        // Pastikan untuk mengirim parameter yang dibutuhkan seperti offset, limit, dll.
+        // Misalnya, Anda dapat menggunakan jQuery.ajax atau Fetch API untuk melakukan permintaan Ajax ke server.
+        // Setelah menerima respons dari server, tambahkan data produk baru ke dalam div #productList.
+        // Di sini, saya hanya menggunakan timeout palsu untuk mensimulasikan pemanggilan Ajax.
+        setTimeout(function() {
+            const productList = document.getElementById('productList');
+            // Di sini, saya hanya menambahkan produk simulasi baru ke dalam daftar.
+            // Anda harus menggantinya dengan logika yang sesuai untuk menambahkan produk baru dari respons server.
+            const newProductsHTML = `
+        <?php $count = 0; ?>
+            
+        @foreach ($result1->detailtampilrelasi as $output)
+        <?php if ($count == 40) break; ?>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="single-product">
+                    <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
+                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                    </a>
+                    <div class="product-details">
+                        <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
+                        <div class="price">
+                            <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
+                            <br>
+                            <small class="l-through">Spesifikasi :</small>
+                        </div>
+                        <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
+                        <div class="prd-bottom">
+                            <a href="" class="social-info">
+                                <span class="fa fa-whatsapp"></span>
+                                <p class="hover-text">bagikan</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php $count++; ?>
+         
+@endforeach
+            `;
+
+            productList.innerHTML += newProductsHTML;
+
+            loadedProducts++; // Perbarui jumlah produk yang telah dimuat
+
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.textContent = 'Load More';
+
+            // Cek apakah sudah mencapai batas maksimum produk yang ingin ditampilkan
+            if (loadedProducts >= 12) {
+                loadMoreBtn.style.display = 'none'; // Sembunyikan tombol "Load More" jika telah mencapai batas
+            }
+        }, 1000); // Timeout simulasi pemanggilan Ajax (1 detik)
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        loadMoreBtn.addEventListener('click', loadMoreProducts);
+    });
+</script>
 @endsection
+
+
+
+
+
+<script>
+    function gotoDetail(kode) {
+        location.href = '{{ url('/show') }}/' + kode;
+    }
+</script>

@@ -176,14 +176,14 @@ sup {
 }
 
 a {
-    color: #007bff;
+    color: #000000;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects
 }
 
 a:hover {
-    color: #0056b3;
+    color: #ffba00;
     text-decoration: underline
 }
 
@@ -5046,14 +5046,14 @@ input[type=submit].btn-block {
 
 .badge-info {
     color: #fff;
-    background-color: #17a2b8
+    background-color: #f4f4f4
 }
 
 .badge-info[href]:focus,
 .badge-info[href]:hover {
     color: #fff;
     text-decoration: none;
-    background-color: #117a8b
+    background-color: #ffffff
 }
 
 .badge-warning {
