@@ -138,14 +138,7 @@
   });
 
 
-    // Reset Form
-        function resetForm(){
-            $("[name='Id_Merek']").val("")
-            $("[name='Nama_Merek']").val("")
-        }
-    //
-
-    // Create 
+    // fungsi tambah data
 
     $("#createForm").on("submit",function(e){
         e.preventDefault()
@@ -163,9 +156,8 @@
         })
     })
 
-    // Create
 
-    // Edit & Update
+    // fungsi edit data
     $('body').on("click",".btn-edit",function(){
         var id = $(this).attr("Id_Merek")
         
@@ -195,8 +187,8 @@
             }
         })
     })
-    //Edit & Update
 
+    // fungsi hapus data
     $('body').on("click",".btn-delete",function(){
         var id = $(this).attr("Id_Merek")
         $(".btn-destroy").attr("Id_Merek",id)

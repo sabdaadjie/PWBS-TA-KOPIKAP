@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
         <button type="submit" class="btn btn-primary btn-store">Simpan</button>
         </form>
       </div>
@@ -138,14 +138,7 @@
   });
 
 
-    // Reset Form
-        function resetForm(){
-            $("[name='Id_Kategori']").val("")
-            $("[name='Nama_Kategori']").val("")
-        }
-    //
-
-    // Create 
+    // Fungsi tambah data
 
     $("#createForm").on("submit",function(e){
         e.preventDefault()
@@ -163,9 +156,8 @@
         })
     })
 
-    // Create
 
-    // Edit & Update
+    // fungsi edit data
     $('body').on("click",".btn-edit",function(){
         var id = $(this).attr("Id_Kategori")
         
@@ -195,8 +187,8 @@
             }
         })
     })
-    //Edit & Update
-
+    
+  // fungsi hapus data
     $('body').on("click",".btn-delete",function(){
         var id = $(this).attr("Id_Kategori")
         $(".btn-destroy").attr("Id_Kategori",id)
