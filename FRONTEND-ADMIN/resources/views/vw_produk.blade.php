@@ -110,35 +110,31 @@
         <form id="editForm">
             <div class="form-group">
                 <label for="n">Nama</label>
-                <input type="" required="" id="n" name="nama" class="form-control">
+                <input type="" required="" id="n" name="Nama_Produk" class="form-control">
             </div>
             <div class="form-group">
                 <label for="e">Harga</label>
-                <input type="" required="" id="e" name="harga" class="form-control">
+                <input type="" required="" id="e" name="Harga" class="form-control">
             </div>
             <div class="form-group">
                 <label for="p">Stok</label>
-                <input type="stok" required="" id="p" name="stok" class="form-control">
+                <input type="stok" required="" id="p" name="Stok_Produk" class="form-control">
             </div>
             <div class="form-group">
                 <label for="p">Spesifikasi</label>
-                <input type="spesifikasi" required="" id="p" name="spesifikasi" class="form-control">
+                <input type="spesifikasi" required="" id="p" name="Spesifikasi" class="form-control">
             </div>
             <div class="form-group">
                 <label for="p">Foto Produk</label>
-                <input type="foto" required="" id="p" name="foto" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="p">Link Foto</label>
-                <input type="link" required="" id="p" name="link" class="form-control">
+                <input type="foto" required="" id="p" name="Foto_Produk" class="form-control">
             </div>
             <div class="form-group">
                 <label for="p">Kategori</label>
-                <input type="kategori" required="" id="p" name="kategori" class="form-control">
+                <input type="kategori" required="" id="p" name="Kategori_Produk" class="form-control">
             </div>
             <div class="form-group">
                 <label for="p">Merk</label>
-                <input type="merk" required="" id="p" name="merk" class="form-control">
+                <input type="merk" required="" id="p" name="Merek" class="form-control">
             </div>
       </div>
       <div class="modal-footer">
@@ -186,15 +182,14 @@
         serverSide: true,
         ajax: "{{ url('/vw_produk') }}",
         columns: [
-            {data: 'DT_RowIndex' , name: 'id'},
-            {data: 'nama', name: 'nama'},
-            {data: 'harga', name: 'harga'},
-            {data: 'stok', name: 'stok'},
-            {data: 'spesifikasi', name: 'spesifikasi'},
-            {data: 'foto', name: 'foto'},
-            {data: 'link', name: 'link'},
-            {data: 'kategori', name: 'kategori'},
-            {data: 'merk', name: 'merk'},
+            {data: 'DT_RowIndex' , name: 'Id_Produk'},
+            {data: 'nama', name: 'Nama_Produk'},
+            {data: 'harga', name: 'Harga'},
+            {data: 'stok', name: 'Stok_Produk'},
+            {data: 'spesifikasi', name: 'Spesifikasi'},
+            {data: 'foto', name: 'Foto_Produk'},
+            {data: 'kategori', name: 'Kategori_Produk'},
+            {data: 'merk', name: 'Merek'},
             
         ]
     });
@@ -203,7 +198,7 @@
 
     // Reset Form
         function resetForm(){
-            $("[name='name']").val("")
+            $("[name='Nama_Produk']").val("")
         }
     //
 
@@ -229,29 +224,28 @@
 
     // Edit & Update
     $('body').on("click",".btn-edit",function(){
-        var id = $(this).attr("id")
+        var id = $(this).attr("Id_Produk")
         
         $.ajax({
             url: "/vw_produk"+id+"/edit",
             method: "GET",
             success:function(response){
                 $("#edit-modal").modal("show")
-                $("#id").val(response.id)
-                $("#nama").val(response.nama)
-                $("#harga").val(response.harga)
-                $("#stok").val(response.stok)
-                $("#spesifikasi").val(response.spesifikasi)
-                $("#foto").val(response.foto)
-                $("#link").val(response.link)
-                $("#kategori").val(response.kategori)
-                $("#merk").val(response.merk)
+                $("#Id_Produk").val(response.Id_Produk)
+                $("#Nama_Produk").val(response.Nama_Produk)
+                $("#Harga").val(response.Harga)
+                $("#Stok_Produk").val(response.Stok_Produk)
+                $("#Spesifikasi").val(response.Spesifikasi)
+                $("#Foto_Produk").val(response.Foto_Produk)
+                $("#Kategori").val(response.Kategori)
+                $("#Merek").val(response.Merek)
             }
         })
     });
 
     $("#editForm").on("submit",function(e){
         e.preventDefault()
-        var id = $("#id").val()
+        var id = $("#Id_Produk").val()
 
         $.ajax({
             url: "/vw_produk"+id,
@@ -267,13 +261,13 @@
     //Edit & Update
 
     $('body').on("click",".btn-delete",function(){
-        var id = $(this).attr("id")
-        $(".btn-destroy").attr("id",id)
+        var id = $(this).attr("Id_Produk")
+        $(".btn-destroy").attr("Id_Produk",id)
         $("#destroy-modal").modal("show")
     });
 
     $(".btn-destroy").on("click",function(){
-        var id = $(this).attr("id")
+        var id = $(this).attr("Id_Produk")
 
         $.ajax({
             url: "/vw_produk"+id,
