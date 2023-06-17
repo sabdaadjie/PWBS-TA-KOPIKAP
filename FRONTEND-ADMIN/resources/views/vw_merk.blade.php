@@ -22,18 +22,27 @@
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
-                            <th>Id Merk</th>
-                            <th>Nama Merk</th>
+                            <th>Id Merek</th>
+                            <th>Nama Merek</th>
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                      @foreach ($result->tampilmerek as $output)
+                          <tr>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                                {{ $output->Id_Merek }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Nama_Merek }}</td>                    
+                          </tr>
+                      @endforeach
+                  </tbody>
                 </table>
             </div>
         </div>
 </div>
 
 <!-- Modal Create -->
+@foreach ($result->tampilmerek as $output)
 <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -43,16 +52,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form id="createForm">
-        <div class="form-group">
-            <label for="n">Id Merk</label>
-            <input type="" required="" id="n" name="Id_Merek" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="e">Nama Merk</label>
-            <input type="" required="" id="e" name="Nama_Merek" class="form-control">
-        </div>
+      <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+        {{ $output->Id_Merek }}</td>
+      <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+        {{ $output->Nama_Merek }}</td>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -62,6 +65,7 @@
     </div>
   </div>
 </div>
+@endforeach
 <!-- Modal Create -->
 
 <!-- Modal Edit -->
@@ -77,12 +81,10 @@
       <div class="modal-body">
         <form id="editForm">
         <div class="form-group">
-            <label for="name">Id Merk</label>
-            <input type="" required="" id="name" name="Id_Merek" class="form-control">
+            <label for="name">Id Merek</label>
         </div>
         <div class="form-group">
-            <label for="email">Nama Merk</label>
-            <input type="" required="" id="email" name="Nama_Merek" class="form-control">
+            <label for="email">Nama Merek</label>
         </div>
       </div>
       <div class="modal-footer">
@@ -121,102 +123,5 @@
 <script src="{{ asset('template/backend/sb-admin-2') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('template/backend/sb-admin-2') }}/js/demo/datatables-demo.js"></script>
 
-<script type="text/javascript">
 
-  $(function () {
-    
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ url('/vw_merk') }}",
-        columns: [
-            {data: 'name' , name: 'Id_Merek'},
-            {data: 'name', name: 'Nama_Merek'},
-
-        ]
-    });
-  });
-
-
-    // fungsi tambah data
-
-    $("#createForm").on("submit",function(e){
-        e.preventDefault()
-
-        $.ajax({
-            url: "/vw_merk",
-            method: "POST",
-            data: $(this).serialize(),
-            success:function(){
-                $("#create-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash("success","Data berhasil ditambah")
-                resetForm()
-            }
-        })
-    })
-
-
-    // fungsi edit data
-    $('body').on("click",".btn-edit",function(){
-        var id = $(this).attr("Id_Merek")
-        
-        $.ajax({
-            url: "/vw_merk"+id+"/edit",
-            method: "GET",
-            success:function(response){
-                $("#edit-modal").modal("show")
-                $("#Id_Merek").val(response.Id_Merek)
-                $("#Nama_Merek").val(response.Nama_Merek)
-            }
-        })
-    });
-
-    $("#editForm").on("submit",function(e){
-        e.preventDefault()
-        var id = $("#Id_Merek").val()
-
-        $.ajax({
-            url: "/vw_merk"+id,
-            method: "PATCH",
-            data: $(this).serialize(),
-            success:function(){
-                $('.data-table').DataTable().ajax.reload();
-                $("#edit-modal").modal("hide")
-                flash("success","Data berhasil diupdate")
-            }
-        })
-    })
-
-    // fungsi hapus data
-    $('body').on("click",".btn-delete",function(){
-        var id = $(this).attr("Id_Merek")
-        $(".btn-destroy").attr("Id_Merek",id)
-        $("#destroy-modal").modal("show")
-    });
-
-    $(".btn-destroy").on("click",function(){
-        var id = $(this).attr("Id_Merek")
-
-        $.ajax({
-            url: "/vw_merk"+id,
-            method: "DELETE",
-            success:function(){
-                $("#destroy-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash('success','Data berhasil dihapus')
-            }
-        });
-    })
-
-    function flash(type,message){
-        $(".notify").html(`<div class="alert alert-`+type+` alert-dismissible fade show" role="alert">
-                              `+message+`
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>`)
-    }
-
-</script>
 @endpush
