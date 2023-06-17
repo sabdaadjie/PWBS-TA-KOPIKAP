@@ -8,25 +8,54 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    function index()
+    function __construct()
+    {
+        $this->admin = new \GuzzleHttp\Client();
+
+    }
+
+    function home()
+    {
+        // menampilkan halaman dashboard
+        return view('home');
+    }
+       // buat fungsi index (tampil )
+    function merek()
     {
         // untuk get dari data server
-        $url = env("API_URL")."view";
+        $url = env("API_URL")."tampilmerek";
 
         // ambil service "get" dari server
-        $request = $this->client->get($url);
-     
+        $request = $this->admin->get($url);
+
         // menampilkan hasil
         $response = $request->getBody();
 
         $data["result"] = json_decode($response);
 
-        // panggil view "home"
-
-        return view("home",$data);
+        // panggil view "merek"
+        return view("vw_merk",$data);
     }
 
-    public function dashboard()
+    function kategori()
+    {
+        // untuk get dari data server
+        $url = env("API_URL")."tampilkategori";
+
+
+        // ambil service "get" dari server
+        $request = $this->admin->get($url);
+
+        // menampilkan hasil
+        $response = $request->getBody();
+
+        $data["result"] = json_decode($response);
+
+        // panggil view "kategori"
+        return view("vw_kategori",$data);
+    }
+
+    function dashboard()
     {
         // menampilkan halaman dashboard
         return view('layout.dashboard');
@@ -46,19 +75,6 @@ class AdminController extends Controller
 
     }
     
-    function kategori()
-    {
-        // tampilkan view "vw_kategori"
-        return view("vw_kategori");
-
-    }
-    
-    function merk()
-    {
-        // tampilkan view "vw_merk"
-        return view("vw_merk");
-
-    }
     
     function profile()
     {
