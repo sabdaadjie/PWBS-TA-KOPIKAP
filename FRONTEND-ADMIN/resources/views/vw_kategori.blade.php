@@ -27,13 +27,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                      @foreach ($result->tampilkategori as $output)
+                          <tr>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                                {{ $output->Id_Kategori }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Nama_Kategori }}</td>                    
+                          </tr>
+                      @endforeach
+                  </tbody>
                 </table>
             </div>
         </div>
 </div>
 
 <!-- Modal Create -->
+@foreach ($result->tampilkategori as $output)
 <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -43,25 +52,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form id="createForm">
-        <div class="form-group">
-            <label for="n">Id Kategori</label>
-            <input type="" required="" id="n" name="Id_Kategori" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="e">Nama Kategori</label>
-            <input type="" required="" id="e" name="Nama_Kategori" class="form-control">
-        </div>
+      <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+        {{ $output->Id_Kategori }}</td>
+      <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+        {{ $output->Nama_Kategori }}</td>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary btn-store">Simpan</button>
         </form>
       </div>
     </div>
   </div>
 </div>
+@endforeach
 <!-- Modal Create -->
 
 <!-- Modal Edit -->
@@ -77,11 +81,11 @@
       <div class="modal-body">
         <form id="editForm">
         <div class="form-group">
-            <label for="name">Id Kategori</label>
+            <label for="name">{{ $output->Id_Kategori }}</label>
             <input type="" required="" id="name" name="Id_Kategori" class="form-control">
         </div>
         <div class="form-group">
-            <label for="email">Nama Kategori</label>
+            <label for="email">{{ $output->Nama_Kategori }}</label>
             <input type="" required="" id="email" name="Nama_Kategori" class="form-control">
         </div>
       </div>
@@ -121,102 +125,5 @@
 <script src="{{ asset('template/backend/sb-admin-2') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('template/backend/sb-admin-2') }}/js/demo/datatables-demo.js"></script>
 
-<script type="text/javascript">
 
-  $(function () {
-    
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ url('/vw_kategori') }}",
-        columns: [
-            {data: 'name' , name: 'Id_Kategori'},
-            {data: 'name', name: 'Nama_Kategori'},
-
-        ]
-    });
-  });
-
-
-    // Fungsi tambah data
-
-    $("#createForm").on("submit",function(e){
-        e.preventDefault()
-
-        $.ajax({
-            url: "/vw_kategori",
-            method: "POST",
-            data: $(this).serialize(),
-            success:function(){
-                $("#create-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash("success","Data berhasil ditambah")
-                resetForm()
-            }
-        })
-    })
-
-
-    // fungsi edit data
-    $('body').on("click",".btn-edit",function(){
-        var id = $(this).attr("Id_Kategori")
-        
-        $.ajax({
-            url: "/vw_kategori"+id+"/edit",
-            method: "GET",
-            success:function(response){
-                $("#edit-modal").modal("show")
-                $("#Id_Kategori").val(response.Id_Kategori)
-                $("#Nama_Kategori").val(response.Nama_Kategori)
-            }
-        })
-    });
-
-    $("#editForm").on("submit",function(e){
-        e.preventDefault()
-        var id = $("#Id_Kategori").val()
-
-        $.ajax({
-            url: "/vw_kategori"+id,
-            method: "PATCH",
-            data: $(this).serialize(),
-            success:function(){
-                $('.data-table').DataTable().ajax.reload();
-                $("#edit-modal").modal("hide")
-                flash("success","Data berhasil diupdate")
-            }
-        })
-    })
-    
-  // fungsi hapus data
-    $('body').on("click",".btn-delete",function(){
-        var id = $(this).attr("Id_Kategori")
-        $(".btn-destroy").attr("Id_Kategori",id)
-        $("#destroy-modal").modal("show")
-    });
-
-    $(".btn-destroy").on("click",function(){
-        var id = $(this).attr("Id_Kategori")
-
-        $.ajax({
-            url: "/vw_kategori"+id,
-            method: "DELETE",
-            success:function(){
-                $("#destroy-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash('success','Data berhasil dihapus')
-            }
-        });
-    })
-
-    function flash(type,message){
-        $(".notify").html(`<div class="alert alert-`+type+` alert-dismissible fade show" role="alert">
-                              `+message+`
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>`)
-    }
-
-</script>
 @endpush
