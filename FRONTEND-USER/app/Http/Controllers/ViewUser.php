@@ -77,7 +77,7 @@ class ViewUser extends Controller
 
 
     // fungsi untuk detail data user
-    function show($parameter)
+    function detail($parameter)
     {
         $kode = ($parameter);
         // url untuk detail_user dari data server
@@ -95,7 +95,7 @@ class ViewUser extends Controller
         
         // panggil view "detail_user"
         
-        return view("show", $data);
+        return view("detail", $data);
     }
     
 

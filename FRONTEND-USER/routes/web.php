@@ -24,13 +24,13 @@ Route::get("kategori", [ViewUser::class, 'kategori']);
 Route::get("brand", [ViewUser::class, 'brand']);
 
 // Route untuk about
-Route::get("about", [ViewUser::class, 'about']);
+// Route::get("about", [ViewUser::class, 'about']);
 
 // Route untuk contact
 Route::get("contact", [ViewUser::class, 'contact']);
 
 
 //route untuk detail data user
-Route::get('show/{parameter}', [ViewUser::class, 'show'])->name('show/{parameter}');
+Route::get('detail/{parameter}', [ViewUser::class, 'detail'])->name('detail/{parameter}');
 
 Route::get('search', [ViewUser::class, 'search'])->name('search');

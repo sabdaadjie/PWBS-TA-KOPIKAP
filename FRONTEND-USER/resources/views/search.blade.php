@@ -44,6 +44,6 @@
 
 <script>
     function gotoDetail(kode) {
-        location.href = '{{ url('/show') }}/' + kode;
+        location.href = '{{ url('/detail') }}/' + kode;
     }
 </script>

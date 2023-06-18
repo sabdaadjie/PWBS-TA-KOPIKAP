@@ -56,9 +56,6 @@
               <li class="nav-item {{ Request::is('kategori') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('kategori')}}">Kategori</a>
               </li>
-              <li class="nav-item {{ Request::is('brand') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('brand')}}">Brand</a>
-              </li>
               <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('contact') }}">Contact</a>
               </li>
