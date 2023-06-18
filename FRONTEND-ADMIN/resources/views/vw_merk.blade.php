@@ -34,7 +34,7 @@
                               <button id="btn_ubah" class="btn btn-primary btn-circle btn-sm"
                                   onclick=""><i class="fa-solid fa-pen-to-square"></i></button>
                               <button id="btn_hapus" class="btn btn-danger btn-circle btn-sm"
-                                  onclick=""><i class="fas fa-trash"></i></button>
+                              onclick="gotoDelete('{{ $output->Id_Merek }}')"><i class="fas fa-trash"></i></button>
                             </td>
                               <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
                                 {{ $output->Id_Merek }}</td>
@@ -158,7 +158,7 @@
           // Ubah class "txt_nik"
           document.querySelector("#txt_Id_Merek").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
           // set error = 0
-          err_nik = 1
+          err_Id_Merek = 1
       ]
       :
       // Hasil Jika salah
@@ -168,7 +168,7 @@
 
           document.querySelector("#txt_Id_Merek").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
           // set error = 0
-          err_nik = 0
+          err_Id_Merek = 0
       ]
 
       const Nama_Merek = document.querySelector("#txt_Nama_Merek").value === "" ? 
@@ -179,7 +179,7 @@
           // Ubah class "txt_nama"
           document.querySelector("#txt_Nama_Merek").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
           // set error = 0
-          err_nama = 1
+          err_Nama_Merek = 1
       ]
       :
       // Hasil Jika salah
@@ -189,20 +189,20 @@
 
           document.querySelector("#txt_Nama_Merek").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
           // set error = 0
-          err_nama = 0
+          err_Nama_Merek = 0
       ]
 
   
       // jika seluruh komponen sudah diisi
       const check = (Id_Merek[2] === 0 && Nama_Merek[2] === 0) ?
       // proses simpan data (panggil fungsi saveData)
-          saveData(document.querySelector("#txt_Id_Merek").value, document.querySelector("#txt_Nama_Merek").value
+          saveDataMerek(document.querySelector("#txt_Id_Merek").value, document.querySelector("#txt_Nama_Merek").value)
       : 
       ""
   }
 
   // buat fungsi save data (Metode async/await)
-  const saveData = async(Id_Merek, Nama_Merek) => {
+  const saveDataMerek = async(Id_Merek, Nama_Merek) => {
       // Collecting data
       let data = {
           "Id_Merek" : Id_Merek,
@@ -229,4 +229,43 @@
           alert("Data Gagal Dikirim !")
       }
   }
+
+  // fungsi untuk link hapus data
+  function gotoDelete(Id_Merek) {
+                if (confirm("ID MEREK : " + Id_Merek + " Ingin Dihapus ?") === true) {
+                    // panggil fungsi "deleteData"
+                    deleteDataMerek(Id_Merek)
+                }
+                // else {
+                //     alert("Tombol Cencel")
+                // }
+            }
+
+            function deleteDataMerek(Id_Merek) {
+                const url = '{{ url('/delete') }}/' + Id_Merek;
+
+
+                // proses async (fetch)
+                fetch(url, {
+                        method: "DELETE",
+                        headers: {
+                            'X-CSRF-Token': document.querySelector('meta[name="_token"]').content
+                        }
+                        // body: JSON.stringify(data)
+                    })
+                    // .then((response) => response.json())
+                    // .then(alert("Data Gagal Dikirim !"))
+
+                    // ini untuk membaca respon dari fetch
+                    .then((respons) => respons.json())
+
+                    // yang ini untuk menampilkan hasil dari then sebelumnya
+                    .then((result) => {
+                        alert(result.pesan)
+                        document.querySelector("#btn_refresh").click()
+                    }) // kurung kurawal {} menandakan adanya lebih dari satu proses
+
+                    // jika terjadi error dari pada saat fetch data
+                    .catch((error) => alert("Data gagal dikirim"))
+            }
 </script>

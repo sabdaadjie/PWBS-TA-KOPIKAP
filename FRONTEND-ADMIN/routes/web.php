@@ -36,6 +36,9 @@ Route::get("/merek", [AdminController::class, 'merek']);
 // Route untuk panggil view kategori
 Route::get("/kategori", [AdminController::class, 'kategori']);
 
+// Route Untuk Hapus Data Karyawan
+Route::delete("/delete/{parameter}", [AdminController::class, 'delete']);
+
 // Route untuk simpan data Karyawan
 Route::post("/insert", [AdminController::class, 'insert']);
 

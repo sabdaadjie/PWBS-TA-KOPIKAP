@@ -105,5 +105,22 @@ class AdminController extends Controller
         // kirim hasil service "post" ke "en_karyawan"
         echo $response;
     }
+
+        // fungsi untuk hapus data karyawan
+        function delete($parameter)
+        {
+            $kode = base64_encode($parameter);
+            // url untuk delete dari data server
+            $url = env("API_URL")."delete/". $kode;
+    
+            // ambil service "delete" dari server
+            $request = $this->admin->delete($url);
+    
+            // menampilkan hasil dari delete server
+            $response = $request->getBody();
+            
+            // kirim hasil service "delete" ke "vw_karyawan"
+            echo $response;
+        }
     
 }
