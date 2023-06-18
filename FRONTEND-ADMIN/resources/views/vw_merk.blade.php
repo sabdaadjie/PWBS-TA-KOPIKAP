@@ -22,6 +22,7 @@
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
+                            <th>Aksi</th>
                             <th>Id Merek</th>
                             <th>Nama Merek</th>
                         </tr>
@@ -29,6 +30,12 @@
                     <tbody>
                       @foreach ($result->tampilmerek as $output)
                           <tr>
+                            <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                              <button id="btn_ubah" class="btn btn-primary btn-circle btn-sm"
+                                  onclick=""><i class="fa-solid fa-pen-to-square"></i></button>
+                              <button id="btn_hapus" class="btn btn-danger btn-circle btn-sm"
+                                  onclick=""><i class="fas fa-trash"></i></button>
+                            </td>
                               <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
                                 {{ $output->Id_Merek }}</td>
                               <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
@@ -52,14 +59,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
-        {{ $output->Id_Merek }}</td>
-      <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
-        {{ $output->Nama_Merek }}</td>
+      <div class="modal-body">
+        <form id="createForm">
+        <div class="form-group">
+            <label for="n">Id Merk</label>
+            <input type="" required="" id="n" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="e">Nama Merk</label>
+            <input type="" required="" id="e" name="email" class="form-control">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary btn-store">Simpan</button>
+        <button type="submit" class="btn btn-primary btn-store" onclick="save()">Simpan</button>
         </form>
       </div>
     </div>
@@ -81,10 +94,12 @@
       <div class="modal-body">
         <form id="editForm">
         <div class="form-group">
-            <label for="name">Id Merek</label>
+            <label for="name">{{ $output->Id_Merek }}</label>
+            <input type="" required="" id="name" name="Id_Merek" class="form-control">
         </div>
         <div class="form-group">
-            <label for="email">Nama Merek</label>
+            <label for="email">{{ $output->Nama_Merek }}</label>
+            <input type="" required="" id="name" name="Nama_Merek" class="form-control">
         </div>
       </div>
       <div class="modal-footer">
@@ -122,6 +137,96 @@
 <script src="{{ asset('template/backend/sb-admin-2') }}/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="{{ asset('template/backend/sb-admin-2') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('template/backend/sb-admin-2') }}/js/demo/datatables-demo.js"></script>
-
-
 @endpush
+
+<script>
+  // hilangkan pesan error
+  document.querySelector("#err_Id_Merek").style.display = 'none'
+  document.querySelector("#err_Nama_Merek").style.display = 'none'
+
+
+
+  // fungsi "btn_simpan"
+  const save = () => {
+
+      // Ternary Computer
+      const Id_Merek = document.querySelector("#txt_Id_Merek").value === "" ? 
+      // hasil jika kondisi benar
+      [
+          // tampilkan error nik
+          document.querySelector("#err_Id_Merek").style.display = 'unset',
+          // Ubah class "txt_nik"
+          document.querySelector("#txt_Id_Merek").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
+          // set error = 0
+          err_nik = 1
+      ]
+      :
+      // Hasil Jika salah
+      [
+          // Sembunyikan err_nik
+          document.querySelector("#err_Id_Merek").style.display = 'none',
+
+          document.querySelector("#txt_Id_Merek").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
+          // set error = 0
+          err_nik = 0
+      ]
+
+      const Nama_Merek = document.querySelector("#txt_Nama_Merek").value === "" ? 
+      // hasil jika kondisi benar
+      [
+          // tampilkan error nama
+          document.querySelector("#err_Nama_Merek").style.display = 'unset',
+          // Ubah class "txt_nama"
+          document.querySelector("#txt_Nama_Merek").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
+          // set error = 0
+          err_nama = 1
+      ]
+      :
+      // Hasil Jika salah
+      [
+          // Sembunyikan err_nama
+          document.querySelector("#err_Nama_Merek").style.display = 'none',
+
+          document.querySelector("#txt_Nama_Merek").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
+          // set error = 0
+          err_nama = 0
+      ]
+
+  
+      // jika seluruh komponen sudah diisi
+      const check = (Id_Merek[2] === 0 && Nama_Merek[2] === 0) ?
+      // proses simpan data (panggil fungsi saveData)
+          saveData(document.querySelector("#txt_Id_Merek").value, document.querySelector("#txt_Nama_Merek").value
+      : 
+      ""
+  }
+
+  // buat fungsi save data (Metode async/await)
+  const saveData = async(Id_Merek, Nama_Merek) => {
+      // Collecting data
+      let data = {
+          "Id_Merek" : Id_Merek,
+          "Nama_Merek" : Nama_Merek,
+          
+      }
+      // proses kirim data
+      try {
+          // kirim data ke controller
+          // await fetch(url,atribut)
+          let response = await fetch("{{url('/insert')}}",{
+              method: "POST",
+              headers: {
+                  'Content-type':'application/json',
+                  'X-CSRF-Token': document.querySelector('meta[name="_token"]').content
+              },
+              body:JSON.stringify(data)
+          })
+          // baca hasil dari controller
+          let result = await response.json()
+          alert(result.pesan)
+
+      } catch (error) {
+          alert("Data Gagal Dikirim !")
+      }
+  }
+</script>

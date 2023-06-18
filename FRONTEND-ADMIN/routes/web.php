@@ -30,11 +30,14 @@ Route::get("/user", [AdminController::class, 'user']);
 // Route untuk panggil view produk
 Route::get("/produk", [AdminController::class, 'produk']);
 
+// Route Untuk panggil view merek
+Route::get("/merek", [AdminController::class, 'merek']);
+
 // Route untuk panggil view kategori
 Route::get("/kategori", [AdminController::class, 'kategori']);
 
-// Route Untuk panggil view merek
-Route::get("/merek", [AdminController::class, 'merek']);
+// Route untuk simpan data Karyawan
+Route::post("/insert", [AdminController::class, 'insert']);
 
 // Route untuk panggil view profile
 Route::get("/profile", [AdminController::class, 'profile'])->name('profile');

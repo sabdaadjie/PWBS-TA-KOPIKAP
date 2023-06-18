@@ -54,7 +54,7 @@
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" onclick="merk()">Merk Produk</a>
+                <a class="collapse-item" onclick="merek()">Merk Produk</a>
             </div>
         </div>
     </li>
@@ -112,6 +112,6 @@
     function kategori() {location.href = '{{ url('/kategori') }}';}
     
     // Buat Fungsi Untuk view kategori
-    function merk() {location.href = '{{ url('/merk') }}';}
+    function merek() {location.href = '{{ url('/merek') }}';}
 
 </script>

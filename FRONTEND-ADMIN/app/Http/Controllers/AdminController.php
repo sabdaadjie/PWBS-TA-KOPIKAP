@@ -19,7 +19,8 @@ class AdminController extends Controller
         // menampilkan halaman dashboard
         return view('home');
     }
-       // buat fungsi index (tampil )
+
+       // buat fungsi tampil merek
     function merek()
     {
         // untuk get dari data server
@@ -37,6 +38,7 @@ class AdminController extends Controller
         return view("vw_merk",$data);
     }
 
+    // buat fungsi tampil kategori
     function kategori()
     {
         // untuk get dari data server
@@ -81,6 +83,27 @@ class AdminController extends Controller
         // tampilkan view "vw_profile"
         return view("vw_profile");
 
+    }
+
+    // buat fungsi untuk simpan data
+    function insert(Request $req)
+    {
+        // untuk post data ke server
+        $url = env("API_URL")."insert";
+
+        // ambil service "post" dari server
+        $request = $this->admin->post($url,[
+            "form_params" => [
+                "Id_Merek" => $req->Id_Merek,
+                "Nama_Merek" => $req->Nama_Merek
+            ]
+        ]);
+
+        // menampilkan hasil dari post server
+        $response = $request->getBody();
+
+        // kirim hasil service "post" ke "en_karyawan"
+        echo $response;
     }
     
 }

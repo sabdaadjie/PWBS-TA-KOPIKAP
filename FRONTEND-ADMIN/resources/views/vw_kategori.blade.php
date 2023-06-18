@@ -2,6 +2,7 @@
     'title' => 'Manage Data',
     'pageTitle' =>'Manage Data',
 ])
+{{-- @extends('layout/main_tamplate') --}}
 
 @push('css')
 <link href="{{ asset('template/backend/sb-admin-2') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -22,6 +23,7 @@
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
+                            <th>Aksi</th>
                             <th>Id Kategori</th>
                             <th>Nama Kategori</th>
                         </tr>
@@ -29,6 +31,14 @@
                     <tbody>
                       @foreach ($result->tampilkategori as $output)
                           <tr>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                                <button id="btn_ubah" class="bg-sky-600 text-white w-10 h-8 rounded-lg"
+                                    onclick=""><i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+                                <button id="btn_hapus" class="bg-red-600 text-white w-10 h-8 rounded-lg"
+                                    onclick=""><i
+                                        class="fa-solid fa-trash"></i></button>
+                              </td>
                               <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
                                 {{ $output->Id_Kategori }}</td>
                               <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
