@@ -35,6 +35,8 @@ Route::post('/insert', [Produk::class, 'insert']);
 Route::post('/uploadgambar', [Produk::class, 'uploadgambar']);
 // Route Untuk tambah data produk
 Route::post('/tampildata', [Produk::class, 'tampildata']);
+// Route Untuk tambah data produk
+Route::post('/store', [Produk::class, 'store']);
 // Route untuk update data produk
 Route::put('/updateProduk/{parameter}', [Produk::class, 'updateProduk']);
 // Route Untuk detail produk

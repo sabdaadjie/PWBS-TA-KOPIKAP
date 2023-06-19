@@ -10,7 +10,7 @@ class MProduk extends Model
 {
     protected $table ='tbl_produk';
 
-    // protected $fillable = ['Id_Produk','Nama_Produk', 'Harga', 'Stok_Produk', 'Spesifikasi','Foto_Produk', 'Kategori', 'Merek'];
+    protected $fillable = ['Id_Produk','Nama_Produk', 'Harga', 'Stok_Produk', 'Spesifikasi','Foto_Produk', 'Kategori', 'Merek'];
     // buat fungsi tambah data produk
     function tampilData()
     {
@@ -511,6 +511,8 @@ class MProduk extends Model
         return $query;
     }
 }
+
+
 
 
 
