@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MProduk;
+use Carbon\Carbon;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Str;
+use Path\To\DOMDocument;
 
 class Produk extends Controller
 {
@@ -122,6 +127,14 @@ class Produk extends Controller
         ], http_response_code());
     }
 
+    // protected function uploadImages($file,$path)
+    // {
+    //     $date = Carbon::now();
+    //     $filePath = $path . "/$date->year";
+    //     $filename = $date->timestamp . '_' . $file->getClientOriginalName();
+    //     return $file->storeAs($filePath, $filename, 'public');
+    // }
+
     // buat function untuk insert data
     function uploadgambar(Request $req)
     {
@@ -137,6 +150,8 @@ class Produk extends Controller
             "Merek" => $req->Merek,
 
         );
+
+        // $image = $this->uploadImages($req->file('Foto_Produk'), 'images/foto');
 
         // $data["Foto_Produk"] = $req->file('Foto_Produk')->store('foto','public');
         // $Foto_Produk = $req->file('Foto_Produk')->getClientOriginalName();
@@ -560,7 +575,91 @@ class Produk extends Controller
             "cari" => $results
         ], 200);
     }
+
+     public function store(Request $request)
+    {
+        // ----------------------------------------------------------
+        // VALIDATION RULES
+        // ----------------------------------------------------------
+        $validateData = $request->validate([
+            'Id_Produk' => 'required',
+            // 'post_excerpt' => 'required',
+            'Nama_Produk' => 'required',
+            'Harga' => 'required',
+            'Stok_Produk' => 'required',
+            'Spesifikasi' => 'required',
+            'Foto_Produk' => 'nullable|image|file|mimes:jpg,jpeg,png|max:512',
+            'Kategori' => 'required',
+            'Merek' => 'required',
+        ]);
+
+        // $validateData['post_author'] = Auth::user()->id;
+
+        // if($request->post_publish == 1) {
+        //     $validateData['post_published_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        // }
+
+        if($request->file('Foto_Produk')) {
+            $validateData['Foto_Produk'] = $request->file('Foto_Produk')->store('Foto');
+        }
+
+        $storageImageContent = "Foto/content/".$request->Foto_Produk;
+        Storage::makeDirectory($storageImageContent);
+
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($request->Nama_Produk, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+        libxml_clear_errors();
+        $contentImages = $dom->getElementsByTagName('img');
+        foreach ($contentImages as $contentImage) {
+            $src = $contentImage->getAttribute('src');
+            if(preg_match('/data:image/', $src)) {
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $fileNameContent = uniqid();
+                $fileNameContentRandom = substr(md5($fileNameContent), 6, 6).'_'.time();
+                $filePath = ("storage/$storageImageContent/$fileNameContentRandom.$mimetype");
+                $foto = Image::make($src)
+                            ->encode($mimetype, 100)
+                            ->save(public_path($filePath));
+                $new_src = asset($filePath);
+                $contentImage->removeAttribute('src');
+                $contentImage->setAttribute('src', $new_src);
+                $contentImage->setAttribute('class', 'img-responsive');
+            }
+        }
+
+        $validateData['Kategori'] = Str::limit(strip_tags($request->Nama_Produk), 160);
+        $validateData['Nama_Produk'] = $dom->saveHTML();
+
+        // ----------------------------------------------------------
+        // CREATE POST
+        // ----------------------------------------------------------
+        MProduk::create([
+            'Id_Produk' => $validateData['Id_Produk'],
+            'Nama_Produk' => $validateData['Nama_Produk'],
+            'Harga' => $validateData['Harga'],
+            'Stok_Produk' => $validateData['Stok_Produk'],
+            'Spesifikasi' => $validateData['Spesifikasi'],
+            'Foto_Produk' => ($request->file('Foto_Produk')) ? $validateData['Foto_Produk'] : null,
+            'Kategori' => $validateData['Kategori'],
+            'Merek' => $validateData['Merek'],
+            // 'status' => $validateData['post_status'],
+            // 'author_id' => $validateData['post_author'],
+            // 'publish' => $validateData['post_publish'],
+            // 'published_at' => ($request->post_publish == 1) ? $validateData['post_published_at'] : null,
+        ]);
+
+        // ----------------------------------------------------------
+        // RESPONSE
+        // ----------------------------------------------------------
+        return response()->json([
+            'status' => 'success',
+            'data' => "New matery has been added!",
+        ]);
+    }
 }
+
 
 
 
