@@ -138,6 +138,11 @@ class Produk extends Controller
     // buat function untuk insert data
     function uploadgambar(Request $req)
     {
+
+        $req->validate([
+            'Foto_Produk' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         // ambil data hasil input
         $data = array(
             "Id_Produk" => $req->Id_Produk,
@@ -145,23 +150,17 @@ class Produk extends Controller
             "Harga" => $req->Harga,
             "Stok_Produk" => $req->Stok_Produk,
             "Spesifikasi" => $req->Spesifikasi,
-            "Foto_Produk" => $req->file('Foto_Produk')->store('img','public'),
+            "Foto_Produk" => $req->Foto_Produk,
             "Kategori" => $req->Kategori,
             "Merek" => $req->Merek,
 
         );
 
-        // $image = $this->uploadImages($req->file('Foto_Produk'), 'images/foto');
+        // $imagepath = Storage::put('public/storage/img', $req->file("Foto_Produk"));
+        // $imagepath=Storage::put('local/images', $req->file('Foto_Produk'));
+        $imagepath= $req->file('Foto_Produk')->store('public/img');
+        $url = asset(Storage::url($imagepath));
 
-        // $data["Foto_Produk"] = $req->file('Foto_Produk')->store('foto','public');
-        // $Foto_Produk = $req->file('Foto_Produk')->getClientOriginalName();
-        // $url_image = Storage::disk('public')->url($Foto_Produk);
-        // $file = $req->file('Foto_Produk');
-
-        // $nama_file = time()."_".$file->getClientOriginalName();
-
-        // $tujuan_file = 'foto';
-        // $file->move($tujuan_file,$nama_file);
         // baruu
         $parameter =($data["Id_Produk"]);
         // cek apakah data produk (Id_Produk) sudah pernah tersimpan/belum
@@ -171,7 +170,7 @@ class Produk extends Controller
         // jika data tidak ditemukan
         if (count($check) == 0) {
             // lakukan proses penyimpanan
-            $this->model->saveData($data["Id_Produk"], $data["Nama_Produk"], $data["Harga"], $data["Stok_Produk"], $data["Spesifikasi"], $data["Foto_Produk"],$data
+            $this->model->saveData($data["Id_Produk"], $data["Nama_Produk"], $data["Harga"], $data["Stok_Produk"], $data["Spesifikasi"], $url,$data
             ["Kategori"], $data["Merek"]);
             // buat pesan dan status hasil penyimpanan data
             $status = 1;
@@ -192,8 +191,12 @@ class Produk extends Controller
             "pesan" => $pesan
         ], http_response_code());
 
+        // return response('File Berhasil Diunggah', 'sukses',  $uploadImageResponse);
+
         // $result = $req->file('Foto_Produk')->store('public/img');
         // return ["result"=>$result];
+        // return response()->json(asset(Storage::url($imagepath)));
+
     }
 
     // Function untuk Update Data Produk
