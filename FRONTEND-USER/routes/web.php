@@ -18,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", [ViewUser::class, 'brand']);
 
 // Route untuk kategori
-Route::get("kategori", [ViewUser::class, 'kategori']);
+Route::get("kategori", [ViewUser::class, 'kategorilaptop']);
 
 // Route untuk brand
 Route::get("brand", [ViewUser::class, 'brand']);
 
 // Route untuk about
-// Route::get("about", [ViewUser::class, 'about']);
+Route::get("about", [ViewUser::class, 'about']);
 
 // Route untuk contact
 Route::get("contact", [ViewUser::class, 'contact']);

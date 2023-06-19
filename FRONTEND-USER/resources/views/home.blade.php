@@ -292,7 +292,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="single-product">
                         <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
-                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
                         </a>
                         <div class="product-details">
                             <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>

@@ -125,15 +125,16 @@
 					<section class="lattest-product-area pb-40 category-list">
 						<div class="row">
 							<!-- single product -->
+							<?php $count = 0; ?>
+							@foreach ($result1->tampilasus as $output)
+							<?php if ($count == 8) break; ?>
 							<div class="col-lg-4 col-md-6">
 								<div class="single-product">
 									<img class="img-fluid" src="img/product/p1.jpg" alt="">
 									<div class="product-details">
-										<h6>addidas New Hammer sole
-											for Sports person</h6>
+										<h6>{{ $output->Nama_Produk }}</h6>
 										<div class="price">
-											<h6>$150.00</h6>
-											<h6 class="l-through">$210.00</h6>
+											<h6>{{ $output->Harga }}</h6>
 										</div>
 										<div class="prd-bottom">
 
@@ -157,30 +158,13 @@
 									</div>
 								</div>
 							</div>
+							<?php $count++; ?>
+							@endforeach
 							<!-- single product -->
 						</div>
+
 					</section>
 					<!-- End Best Seller -->
-					<!-- Start Filter Bar -->
-					<div class="filter-bar d-flex flex-wrap align-items-center">
-						<div class="sorting mr-auto">
-							<select>
-								<option value="1">Show 12</option>
-								<option value="1">Show 12</option>
-								<option value="1">Show 12</option>
-							</select>
-						</div>
-						<div class="pagination">
-							<a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-							<a href="#" class="active">1</a>
-							<a href="#">2</a>
-							<a href="#">3</a>
-							<a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-							<a href="#">6</a>
-							<a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<!-- End Filter Bar -->
 				</div>
 			</div>
 		</div>
