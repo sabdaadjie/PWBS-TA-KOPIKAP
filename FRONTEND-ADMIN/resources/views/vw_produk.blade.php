@@ -200,3 +200,134 @@
 <script src="{{ asset('template/backend/sb-admin-2') }}/js/demo/datatables-demo.js"></script>
 
 @endpush
+
+<script>
+  // hilangkan pesan error
+  document.querySelector("#err_Id_Produk").style.display = 'none'
+  document.querySelector("#err_Nama_Produk").style.display = 'none'
+
+
+
+  // fungsi "btn_simpan"
+  const save = () => {
+
+      // Ternary Computer
+      const Id_Produk = document.querySelector("#txt_Id_Produk").value === "" ? 
+      // hasil jika kondisi benar
+      [
+          // tampilkan error merek
+          document.querySelector("#err_Id_Produk").style.display = 'unset',
+          // Ubah class "txt_merek"
+          document.querySelector("#txt_Id_Produk").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
+          // set error = 0
+          err_Id_Produk = 1
+      ]
+      :
+      // Hasil Jika salah
+      [
+          // Sembunyikan err
+          document.querySelector("#err_Id_Produk").style.display = 'none',
+
+          document.querySelector("#txt_Id_Produk").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
+          // set error = 0
+          err_Id_Produk = 0
+      ]
+
+      const Nama_Produk = document.querySelector("#txt_Nama_Produk").value === "" ? 
+      // hasil jika kondisi benar
+      [
+          // tampilkan error nama
+          document.querySelector("#err_Nama_Produk").style.display = 'unset',
+          // Ubah class "txt_nama"
+          document.querySelector("#txt_Nama_Produk").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
+          // set error = 0
+          err_Nama_Produk = 1
+      ]
+      :
+      // Hasil Jika salah
+      [
+          // Sembunyikan err_nama
+          document.querySelector("#err_Nama_Produk").style.display = 'none',
+
+          document.querySelector("#txt_Nama_Produk").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
+          // set error = 0
+          err_Nama_Produk = 0
+      ]
+
+  
+      // jika seluruh komponen sudah diisi
+      const check = (Id_Produk[2] === 0 && Nama_Produk[2] === 0) ?
+      // proses simpan data (panggil fungsi saveData)
+          saveDataMerek(document.querySelector("#txt_Id_Produk").value, document.querySelector("#txt_Nama_Produk").value)
+      : 
+      ""
+  }
+
+  // buat fungsi save data (Metode async/await)
+  const saveDataMerek = async(Id_Produk, Nama_Produk) => {
+      // Collecting data
+      let data = {
+          "Id_Produk" : Id_Produk,
+          "Nama_Produk" : Nama_Produk,
+          
+      }
+      // proses kirim data
+      try {
+          // kirim data ke controller
+          // await fetch(url,atribut)
+          let response = await fetch("{{url('/insert')}}",{
+              method: "POST",
+              headers: {
+                  'Content-type':'application/json',
+                  'X-CSRF-Token': document.querySelector('meta[name="_token"]').content
+              },
+              body:JSON.stringify(data)
+          })
+          // baca hasil dari controller
+          let result = await response.json()
+          alert(result.pesan)
+
+      } catch (error) {
+          alert("Data Gagal Dikirim !")
+      }
+  }
+
+  // fungsi untuk link hapus data
+  function gotoDelete(Id_Produk) {
+                if (confirm("ID MEREK : " + Id_Produk + " Ingin Dihapus ?") === true) {
+                    // panggil fungsi "deleteData"
+                    deleteDataMerek(Id_Produk)
+                }
+                // else {
+                //     alert("Tombol Cencel")
+                // }
+            }
+
+            function deleteDataMerek(Id_Produk) {
+                const url = '{{ url('/delete') }}/' + Id_Produk;
+
+
+                // proses async (fetch)
+                fetch(url, {
+                        method: "DELETE",
+                        headers: {
+                            'X-CSRF-Token': document.querySelector('meta[name="_token"]').content
+                        }
+                        // body: JSON.stringify(data)
+                    })
+                    // .then((response) => response.json())
+                    // .then(alert("Data Gagal Dikirim !"))
+
+                    // ini untuk membaca respon dari fetch
+                    .then((respons) => respons.json())
+
+                    // yang ini untuk menampilkan hasil dari then sebelumnya
+                    .then((result) => {
+                        alert(result.pesan)
+                        document.querySelector("#btn_refresh").click()
+                    }) // kurung kurawal {} menandakan adanya lebih dari satu proses
+
+                    // jika terjadi error dari pada saat fetch data
+                    .catch((error) => alert("Data gagal dikirim"))
+            }
+</script>
