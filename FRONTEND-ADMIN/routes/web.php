@@ -14,12 +14,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
-// Route untuk tambah data
-Route::get("/add", [AdminController::class, 'add']);
+// Route Untuk View Data Karyawan
+Route::get("/", [AdminController::class, 'home']);
 
-// Route untuk View User
-Route::get("/vw_user", [AdminController::class, 'vw_user']);
+
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('layout.dashboard');
+
+// Route untuk panggil view user
+Route::get("/user", [AdminController::class, 'user']);
+
+// Route untuk panggil view produk
+Route::get("/produk", [AdminController::class, 'produk']);
+
+// Route Untuk panggil view merek
+Route::get("/merek", [AdminController::class, 'merek']);
+
+// Route untuk panggil view kategori
+Route::get("/kategori", [AdminController::class, 'kategori']);
+
+// Route Untuk Hapus Data Karyawan
+Route::delete("/delete/{parameter}", [AdminController::class, 'delete']);
+
+// Route untuk simpan data Karyawan
+Route::post("/insert", [AdminController::class, 'insert']);
+
+// Route untuk panggil view profile
+Route::get("/profile", [AdminController::class, 'profile'])->name('profile');
