@@ -49,33 +49,33 @@
                 </div>
             </div>
             <div class="col-xl-9 col-lg-8 col-md-7">
-					<!-- Start Filter Bar -->
-					<div class="filter-bar d-flex flex-wrap align-items-center">
-						<div class="sorting">
-							<select>
-								<option value="1">Default sorting</option>
-								<option value="1">Default sorting</option>
-								<option value="1">Default sorting</option>
-							</select>
-						</div>
-						<div class="sorting mr-auto">
-							<select>
-								<option value="1">Show 12</option>
-								<option value="1">Show 12</option>
-								<option value="1">Show 12</option>
-							</select>
-						</div>
-						<div class="pagination">
-							<a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-							<a href="#" class="active">1</a>
-							<a href="#">2</a>
-							<a href="#">3</a>
-							<a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-							<a href="#">6</a>
-							<a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<!-- End Filter Bar -->
+                <!-- Start Filter Bar -->
+                <div class="filter-bar d-flex flex-wrap align-items-center">
+                    <div class="sorting">
+                        <select>
+                            <option value="1">Default sorting</option>
+                            <option value="1">Default sorting</option>
+                            <option value="1">Default sorting</option>
+                        </select>
+                    </div>
+                    <div class="sorting mr-auto">
+                        <select>
+                            <option value="1">Show 12</option>
+                            <option value="1">Show 12</option>
+                            <option value="1">Show 12</option>
+                        </select>
+                    </div>
+                    <div class="pagination">
+                        <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                        <a href="#">6</a>
+                        <a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <!-- End Filter Bar -->
                 <div id="categoryContent"></div>
             </div>
         </div>
@@ -107,17 +107,18 @@
                                 @php if ($count == 40) break; @endphp
                                 <div class="col-lg-4 col-md-6">
                                     <div class="single-product">
-                                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
                                         <div class="product-details">
-                                            <div class="price">
+                                        <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
+                            <div class="price">
+                                                <h5 class="text-warning">{{$output->Harga}}</h5>
                                                 <br>
                                                 <small class="l-through">Spesifikasi :</small>
                                             </div>
                                             <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                                             <div class="prd-bottom">
                                                 <a href="" class="social-info">
-                                                    <span class="fa fa-whatsapp"></span>
-                                                    <p class="hover-text">bagikan</p>
+
                                                 </a>
                                             </div>
                                         </div>
@@ -138,17 +139,18 @@
                                 @php if ($count == 40) break; @endphp
                                 <div class="col-lg-4 col-md-6">
                                     <div class="single-product">
-                                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
                                         <div class="product-details">
-                                            <div class="price">
+                                        <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
+                            <div class="price">
+                            <h5 class="text-warning">{{$output->Harga}}</h5>
                                                 <br>
                                                 <small class="l-through">Spesifikasi :</small>
                                             </div>
                                             <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                                             <div class="prd-bottom">
                                                 <a href="" class="social-info">
-                                                    <span class="fa fa-whatsapp"></span>
-                                                    <p class="hover-text">bagikan</p>
+
                                                 </a>
                                             </div>
                                         </div>
@@ -169,17 +171,20 @@
                                 @php if ($count == 40) break; @endphp
                                 <div class="col-lg-4 col-md-6">
                                     <div class="single-product">
-                                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                                    <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
+                                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
+                                         </a>
                                         <div class="product-details">
-                                            <div class="price">
+                                        <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
+                                        <div class="price">
+                                            <h5 class="text-warning">{{$output->Harga}}</h5>
                                                 <br>
                                                 <small class="l-through">Spesifikasi :</small>
                                             </div>
                                             <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                                             <div class="prd-bottom">
                                                 <a href="" class="social-info">
-                                                    <span class="fa fa-whatsapp"></span>
-                                                    <p class="hover-text">bagikan</p>
+
                                                 </a>
                                             </div>
                                         </div>
@@ -200,7 +205,7 @@
             case "Apple":
                 document.getElementById("categoryContent").innerHTML = "Konten Apple";
                 break;
-            // Tambahkan case untuk kategori lainnya di sini
+                // Tambahkan case untuk kategori lainnya di sini
 
             default:
                 break;
@@ -208,3 +213,9 @@
     }
 </script>
 @endsection
+
+<script>
+    function gotoDetail(kode) {
+        location.href = '{{ url('/detail') }}/' + kode;
+    }
+</script>

@@ -18,11 +18,12 @@
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">
                     <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
-                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
                     </a>
                     <div class="product-details">
                         <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                         <div class="price">
+                        <h5 class="text-warning">{{$output->Harga}}</h5>
                             <small class="l-through">Kategori : {{$output->Kategori}}</small>
                             <br>
                             <small class="l-through">Spesifikasi :</small>
@@ -30,8 +31,8 @@
                         <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                         <div class="prd-bottom">
                             <a href="" class="social-info">
-                                <span class="fa fa-whatsapp"></span>
-                                <p class="hover-text">bagikan</p>
+                                <!-- <span class="fa fa-whatsapp"></span>
+                                <p class="hover-text">bagikan</p> -->
                             </a>
                         </div>
                     </div>

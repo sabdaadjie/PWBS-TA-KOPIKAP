@@ -705,6 +705,10 @@ progress {
 
 .img-fluid {
   max-width: 100%;
+  height: 277.867px;
+}
+.img-fluiddetail {
+  max-width: 100%;
   height: auto;
 }
 

@@ -247,11 +247,12 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="single-product">
                         <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
-                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
                         </a>
                         <div class="product-details">
                             <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                             <div class="price">
+                                <h5 class="text-warning">{{$output->Harga}}</h5>
                             <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
                                 <br>
                                 <small class="l-through">Spesifikasi :</small>
@@ -259,8 +260,8 @@
                             <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                             <div class="prd-bottom">
                                 <a href="" class="social-info">
-                                    <span class="fa fa-whatsapp"></span>
-                                    <p class="hover-text">bagikan</p>
+                                    <!-- <span class="fa fa-whatsapp"></span>
+                                    <p class="hover-text">bagikan</p> -->
                                 </a>
                             </div>
                         </div>
@@ -293,11 +294,12 @@
                     <div class="single-product">
                         <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
                         <!-- <img class="img-fluid" src="{{ $output->Foto_Produk }}" alt="" /> -->
-                        <img src="{{ asset('img/laptopasus.png') }}">
+                        <img class="img-fluid" src="{{$output->Foto_Produk}}">
                         </a>
                         <div class="product-details">
                             <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                             <div class="price">
+                            <h5 class="text-warning">{{$output->Harga}}</h5>
                             <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
                                 <br>
                                 <small class="l-through">Spesifikasi :</small>
@@ -305,8 +307,8 @@
                             <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                             <div class="prd-bottom">
                                 <a href="" class="social-info">
-                                    <span class="fa fa-whatsapp"></span>
-                                    <p class="hover-text">bagikan</p>
+                                    <!-- <span class="fa fa-whatsapp"></span>
+                                    <p class="hover-text">bagikan</p> -->
                                 </a>
                             </div>
                         </div>
@@ -325,18 +327,18 @@
         <div class="row ">
             <div class="col-lg-4 ">
                 <div class="categories_post">
-                    <img src="img/blog/cat-post/cat-post-3.jpg" alt="post">
+                    <img src="img/banner/11.jpg" alt="post">
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="categories_post">
-                    <img src="img/blog/cat-post/cat-post-2.jpg" alt="post">
+                    <img src="img/banner/12.jpg" alt="post">
 
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="categories_post">
-                    <img src="img/blog/cat-post/cat-post-1.jpg" alt="post">
+                    <img src="img/banner/13.jpg" alt="post">
                 </div>
             </div>
         </div>
@@ -358,11 +360,12 @@
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">
                     <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
-                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
                     </a>
                     <div class="product-details">
                         <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                         <div class="price">
+                        <h5 class="text-warning">{{$output->Harga}}</h5>
                             <small class="l-through">Kategori : {{$output->Kategori}}</small>
                             <br>
                             <small class="l-through">Spesifikasi :</small>
@@ -370,8 +373,8 @@
                         <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                         <div class="prd-bottom">
                             <a href="" class="social-info">
-                                <span class="fa fa-whatsapp"></span>
-                                <p class="hover-text">bagikan</p>
+                                <!-- <span class="fa fa-whatsapp"></span>
+                                <p class="hover-text">bagikan</p> -->
                             </a>
                         </div>
                     </div>
@@ -415,11 +418,12 @@
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">
                     <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
-                        <img class="img-fluid" src="/img/product/p1.jpg" alt="" />
+                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
                     </a>
                     <div class="product-details">
                         <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                         <div class="price">
+                        <h5 class="text-warning">{{$output->Harga}}</h5>
                             <small class="l-through">Kategori : {{$output->Kategori}}</small>
                             <br>
                             <small class="l-through">Spesifikasi :</small>
@@ -427,8 +431,6 @@
                         <small>{{ Illuminate\Support\Str::limit($output->Spesifikasi, 100) }}</small>
                         <div class="prd-bottom">
                             <a href="" class="social-info">
-                                <span class="fa fa-whatsapp"></span>
-                                <p class="hover-text">bagikan</p>
                             </a>
                         </div>
                     </div>
