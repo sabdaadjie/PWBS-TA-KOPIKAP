@@ -39,7 +39,12 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" onclick="user()">Data User</a>
+                <a class="collapse-item" onclick="kategori()">Kategori Produk</a>
+            </div>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" onclick="merek()">Merk Produk</a>
             </div>
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -49,12 +54,7 @@
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" onclick="kategori()">Kategori Produk</a>
-            </div>
-        </div>
-        <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" onclick="merek()">Merk Produk</a>
+                <a class="collapse-item" onclick="user()">Data User</a>
             </div>
         </div>
     </li>
