@@ -400,15 +400,10 @@
         loadMoreBtn.disabled = true;
         loadMoreBtn.textContent = 'Loading...';
 
-        // Lakukan pemanggilan Ajax untuk memuat data produk selanjutnya dari server
-        // Pastikan untuk mengirim parameter yang dibutuhkan seperti offset, limit, dll.
-        // Misalnya, Anda dapat menggunakan jQuery.ajax atau Fetch API untuk melakukan permintaan Ajax ke server.
-        // Setelah menerima respons dari server, tambahkan data produk baru ke dalam div #productList.
-        // Di sini, saya hanya menggunakan timeout palsu untuk mensimulasikan pemanggilan Ajax.
+
         setTimeout(function() {
             const productList = document.getElementById('productList');
-            // Di sini, saya hanya menambahkan produk simulasi baru ke dalam daftar.
-            // Anda harus menggantinya dengan logika yang sesuai untuk menambahkan produk baru dari respons server.
+    
             const newProductsHTML = `
         <?php $count = 0; ?>
             
