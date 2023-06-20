@@ -1,6 +1,6 @@
 @extends('home',[
     'title' => 'Manage Data',
-    'pageTitle' =>'Manage Data',
+    'pageTitle' =>'Data User',
 ])
 
 @push('css')
@@ -22,15 +22,36 @@
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th>Aksi</th>
+                            <th>Id User</th>
                             <th>Nama</th>
                             <th>Email</th>
+                            <th>Password</th>
                             <th>Role</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                      @foreach ($result->tampiluser as $output)
+                          <tr>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                                <button id="btn_ubah" class="btn btn-primary btn-circle btn-sm"
+                                    onclick=""><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button id="btn_hapus" class="btn btn-danger btn-circle btn-sm"
+                                onclick=""><i class="fas fa-trash"></i></button>
+                              </td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                                {{ $output->Id_User }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Nama }}</td>                    
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->email }}</td>                    
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->password }}</td>                    
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->role }}</td>                    
+                          </tr>
+                      @endforeach
+                  </tbody>
                 </table>
             </div>
         </div>

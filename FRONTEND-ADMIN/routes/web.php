@@ -18,11 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('home');
 // });
 
-// Route Untuk View Data Karyawan
-Route::get("/", [AdminController::class, 'home']);
 
-
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('layout.dashboard');
+// route untuk dashboard
+Route::get('/', [AdminController::class, 'index'])->name('layout.dashboard');
 
 // Route untuk panggil view user
 Route::get("/user", [AdminController::class, 'user']);
@@ -36,10 +34,10 @@ Route::get("/merek", [AdminController::class, 'merek']);
 // Route untuk panggil view kategori
 Route::get("/kategori", [AdminController::class, 'kategori']);
 
-// Route Untuk Hapus Data Karyawan
+// Route Untuk Hapus Data
 Route::delete("/delete/{parameter}", [AdminController::class, 'delete']);
 
-// Route untuk simpan data Karyawan
+// Route untuk simpan
 Route::post("/insert", [AdminController::class, 'insert']);
 
 // Route untuk panggil view profile
