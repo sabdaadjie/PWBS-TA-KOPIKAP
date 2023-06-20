@@ -292,7 +292,8 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="single-product">
                         <a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">
-                        <img class="img-fluid" src="{{$output->Foto_Produk}}" alt="" />
+                        <!-- <img class="img-fluid" src="{{ $output->Foto_Produk }}" alt="" /> -->
+                        <img src="{{ asset('img/laptopasus.png') }}">
                         </a>
                         <div class="product-details">
                             <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
@@ -352,7 +353,7 @@
     <div id="productList" class="row section_gap_top">
         <!-- single product -->
         <?php $count = 0; ?>
-        @foreach ($result1->detailtampilrelasi as $output)
+        @foreach ($result1->tampilproduk as $output)
             <?php if ($count == 12) break; ?>
             <div class="col-lg-3 col-md-6">
                 <div class="single-product">
@@ -362,7 +363,7 @@
                     <div class="product-details">
                         <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                         <div class="price">
-                            <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
+                            <small class="l-through">Kategori : {{$output->Kategori}}</small>
                             <br>
                             <small class="l-through">Spesifikasi :</small>
                         </div>
@@ -408,7 +409,7 @@
             const newProductsHTML = `
         <?php $count = 0; ?>
             
-        @foreach ($result1->detailtampilrelasi as $output)
+        @foreach ($result1->tampilproduk as $output)
         <?php if ($count == 40) break; ?>
 
             <div class="col-lg-3 col-md-6">
@@ -419,7 +420,7 @@
                     <div class="product-details">
                         <h6><a href="javascript:void(0);" onclick="gotoDetail('{{ $output->Id_Produk }}')">{{ $output->Nama_Produk}}</h6>
                         <div class="price">
-                            <small class="l-through">Kategori : {{$output->Nama_Kategori}}</small>
+                            <small class="l-through">Kategori : {{$output->Kategori}}</small>
                             <br>
                             <small class="l-through">Spesifikasi :</small>
                         </div>

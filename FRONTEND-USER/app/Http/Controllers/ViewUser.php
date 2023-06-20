@@ -20,7 +20,7 @@ class ViewUser extends Controller
         $client = new \GuzzleHttp\Client();
     
         // Mengambil data dari server pertama
-        $url1 = env("API_URL") . "tampilrelasi";
+        $url1 = env("API_URL") . "tampil";
         $request1 = $client->get($url1);
         $response1 = $request1->getBody();
         $data1["result1"] = json_decode($response1);
