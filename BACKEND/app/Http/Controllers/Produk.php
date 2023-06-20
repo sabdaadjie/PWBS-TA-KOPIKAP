@@ -567,6 +567,16 @@ class Produk extends Controller
     public function search($Nama_Produk)
     {
         return MProduk::where("Nama_Produk","like","%".$Nama_Produk."%")->get();
+        
+    }
+
+    public function search1($Nama_Produk)
+    {
+        $results = MProduk::where('Nama_Produk', 'LIKE', '%'.$Nama_Produk.'%')->get();
+    
+        return response([
+            "cari" => $results
+        ], 200);
     }
 
      public function store(Request $request)

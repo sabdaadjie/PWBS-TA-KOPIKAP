@@ -45,6 +45,8 @@ Route::get('/detail/{parameter}', [Produk::class, 'detail']);
 // Route untuk PENCARIAN
 Route::get('/search/{Nama_Produk}', [Produk::class, 'search']);
 
+Route::get('/search1/{Nama_Produk}', [Produk::class, 'search1']);
+
 
 // Route untuk tampil data kategori
 Route::get('/detailkategori/{parameter}', [Kategori::class, 'detailkategori']); 

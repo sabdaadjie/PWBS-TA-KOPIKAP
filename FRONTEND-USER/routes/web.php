@@ -14,18 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Vuser/home');
-});
+
+Route::get("/", [ViewUser::class, 'brand']);
 
 // Route untuk kategori
-Route::get("Vuser/kategori", [ViewUser::class, 'kategori']);
+Route::get("kategori", [ViewUser::class, 'kategorilaptop']);
 
 // Route untuk brand
-Route::get("Vuser/brand", [ViewUser::class, 'brand']);
+Route::get("brand", [ViewUser::class, 'brand']);
 
-// Route untuk lokasi
-Route::get("Vuser/lokasi", [ViewUser::class, 'lokasitoko']);
+// Route untuk about
+Route::get("about", [ViewUser::class, 'about']);
 
 // Route untuk contact
-Route::get("Vuser/contact", [ViewUser::class, 'contact']);
+Route::get("contact", [ViewUser::class, 'contact']);
+
+
+//route untuk detail data user
+Route::get('detail/{parameter}', [ViewUser::class, 'detail'])->name('detail/{parameter}');
+
+Route::get('search', [ViewUser::class, 'search'])->name('search');
