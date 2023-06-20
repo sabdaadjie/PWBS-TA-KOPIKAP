@@ -31,8 +31,8 @@
                       @foreach ($result->tampilmerek as $output)
                           <tr>
                             <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
-                              <button id="btn_ubah" class="btn btn-primary btn-circle btn-sm"
-                                  onclick=""><i class="fa-solid fa-pen-to-square"></i></button>
+                              <button id="btn-edit" class="btn btn-primary btn-circle btn-sm"
+                              ><i class="fa-solid fa-pen-to-square"></i></button>
                               <button id="btn_hapus" class="btn btn-danger btn-circle btn-sm"
                               onclick="gotoDelete('{{ $output->Id_Merek }}')"><i class="fas fa-trash"></i></button>
                             </td>
@@ -92,12 +92,12 @@
       <div class="modal-body">
         <form id="editForm">
         <div class="form-group">
-            <label for="name">{{ $output->Id_Merek }}</label>
-            <input type="" required="" id="name" name="Id_Merek" class="form-control">
+            <label for="name">Id Merek</label>
+            <input type="" required="" id="id" name="id" class="form-control">
         </div>
         <div class="form-group">
-            <label for="email">{{ $output->Nama_Merek }}</label>
-            <input type="" required="" id="name" name="Nama_Merek" class="form-control">
+            <label for="email">Nama Merek</label>
+            <input type="" required="" id="name" name="name" class="form-control">
         </div>
       </div>
       <div class="modal-footer">
@@ -266,4 +266,36 @@
                     // jika terjadi error dari pada saat fetch data
                     .catch((error) => alert("Data gagal dikirim"))
             }
+
+   // Edit & Update
+   $('body').on("click",".btn-edit",function(){
+        var id = $(this).attr("Id_Merek")
+        
+        $.ajax({
+            url: "/vw_merk"+id+"/edit",
+            method: "GET",
+            success:function(response){
+                $("#edit-modal").modal("show")
+                $("#id").val(response.Id_Merek)
+                $("#name").val(response.Nama_Merek)
+            }
+        })
+    });
+
+    $("#editForm").on("submit",function(e){
+        e.preventDefault()
+        var id = $("#id").val()
+
+        $.ajax({
+            url: "/vw_merek"+id,
+            method: "PATCH",
+            data: $(this).serialize(),
+            success:function(){
+                $('.data-table').DataTable().ajax.reload();
+                $("#edit-modal").modal("hide")
+                flash("success","Data berhasil diupdate")
+            }
+        })
+    })
+    //Edit & Update
 </script>

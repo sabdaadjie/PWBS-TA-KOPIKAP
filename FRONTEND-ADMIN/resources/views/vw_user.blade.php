@@ -1,4 +1,4 @@
-@extends('home',[
+@extends('layout.dashboard',[
     'title' => 'Manage Data',
     'pageTitle' =>'Data User',
 ])
@@ -122,6 +122,10 @@
             <input type="" required="" id="email" name="email" class="form-control">
         </div>
         <div class="form-group">
+            <label for="password">Password</label>
+            <input type="" required="" id="password" name="password" class="form-control">
+        </div>
+        <div class="form-group">
             <label for="role">Role</label>
             <select name="role" id="role" class="form-control">
                 <option disabled="">- PILIH ROLE -</option>
@@ -166,116 +170,134 @@
 <script src="{{ asset('template/backend/sb-admin-2') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('template/backend/sb-admin-2') }}/js/demo/datatables-demo.js"></script>
 
-<script type="text/javascript">
-
-  $(function () {
-    
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ url('/vw_user') }}",
-        columns: [
-            {data: 'DT_RowIndex' , name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'role', name: 'role'},
-            {data: 'action', name: 'action', orderable: false, searchable: true},
-        ]
-    });
-  });
+<script>
+  // hilangkan pesan error
+  document.querySelector("#err_Id_User").style.display = 'none'
+  document.querySelector("#err_Nama_User").style.display = 'none'
 
 
-    // Reset Form
-        function resetForm(){
-            $("[name='name']").val("")
-            $("[name='email']").val("")
-            $("[name='password']").val("")
-        }
-    //
 
-    // Fungsi Simpan data
+  // fungsi "btn_simpan"
+  const save = () => {
 
-    $("#createForm").on("submit",function(e){
-        e.preventDefault()
+      // Ternary Computer
+      const Id_User = document.querySelector("#txt_Id_User").value === "" ? 
+      // hasil jika kondisi benar
+      [
+          // tampilkan error merek
+          document.querySelector("#err_Id_User").style.display = 'unset',
+          // Ubah class "txt_merek"
+          document.querySelector("#txt_Id_User").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
+          // set error = 0
+          err_Id_User = 1
+      ]
+      :
+      // Hasil Jika salah
+      [
+          // Sembunyikan err
+          document.querySelector("#err_Id_User").style.display = 'none',
 
-        $.ajax({
-            url: "/vw_user",
-            method: "POST",
-            data: $(this).serialize(),
-            success:function(){
-                $("#create-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash("success","Data berhasil ditambah")
-                resetForm()
+          document.querySelector("#txt_Id_User").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
+          // set error = 0
+          err_Id_User = 0
+      ]
+
+      const Nama_User = document.querySelector("#txt_Nama_User").value === "" ? 
+      // hasil jika kondisi benar
+      [
+          // tampilkan error nama
+          document.querySelector("#err_Nama_User").style.display = 'unset',
+          // Ubah class "txt_nama"
+          document.querySelector("#txt_Nama_User").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
+          // set error = 0
+          err_Nama_User = 1
+      ]
+      :
+      // Hasil Jika salah
+      [
+          // Sembunyikan err_nama
+          document.querySelector("#err_Nama_User").style.display = 'none',
+
+          document.querySelector("#txt_Nama_User").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
+          // set error = 0
+          err_Nama_User = 0
+      ]
+
+  
+      // jika seluruh komponen sudah diisi
+      const check = (Id_User[2] === 0 && Nama_User[2] === 0) ?
+      // proses simpan data (panggil fungsi saveData)
+          saveDataMerek(document.querySelector("#txt_Id_User").value, document.querySelector("#txt_Nama_User").value)
+      : 
+      ""
+  }
+
+  // buat fungsi save data (Metode async/await)
+  const saveDataMerek = async(Id_User, Nama_User) => {
+      // Collecting data
+      let data = {
+          "Id_User" : Id_User,
+          "Nama_User" : Nama_User,
+          
+      }
+      // proses kirim data
+      try {
+          // kirim data ke controller
+          // await fetch(url,atribut)
+          let response = await fetch("{{url('/insert')}}",{
+              method: "POST",
+              headers: {
+                  'Content-type':'application/json',
+                  'X-CSRF-Token': document.querySelector('meta[name="_token"]').content
+              },
+              body:JSON.stringify(data)
+          })
+          // baca hasil dari controller
+          let result = await response.json()
+          alert(result.pesan)
+
+      } catch (error) {
+          alert("Data Gagal Dikirim !")
+      }
+  }
+
+  // fungsi untuk link hapus data
+  function gotoDelete(Id_User) {
+                if (confirm("ID MEREK : " + Id_User + " Ingin Dihapus ?") === true) {
+                    // panggil fungsi "deleteData"
+                    deleteDataMerek(Id_User)
+                }
+                // else {
+                //     alert("Tombol Cencel")
+                // }
             }
-        })
-    })
+
+            function deleteDataMerek(Id_User) {
+                const url = '{{ url('/delete') }}/' + Id_User;
 
 
-    // Fungsi Edit & Update
-    $('body').on("click",".btn-edit",function(){
-        var id = $(this).attr("id")
-        
-        $.ajax({
-            url: "/vw_user"+id+"/edit",
-            method: "GET",
-            success:function(response){
-                $("#edit-modal").modal("show")
-                $("#id").val(response.id)
-                $("#name").val(response.name)
-                $("#email").val(response.email)
-                $("#role").val(response.role)
+                // proses async (fetch)
+                fetch(url, {
+                        method: "DELETE",
+                        headers: {
+                            'X-CSRF-Token': document.querySelector('meta[name="_token"]').content
+                        }
+                        // body: JSON.stringify(data)
+                    })
+                    // .then((response) => response.json())
+                    // .then(alert("Data Gagal Dikirim !"))
+
+                    // ini untuk membaca respon dari fetch
+                    .then((respons) => respons.json())
+
+                    // yang ini untuk menampilkan hasil dari then sebelumnya
+                    .then((result) => {
+                        alert(result.pesan)
+                        document.querySelector("#btn_refresh").click()
+                    }) // kurung kurawal {} menandakan adanya lebih dari satu proses
+
+                    // jika terjadi error dari pada saat fetch data
+                    .catch((error) => alert("Data gagal dikirim"))
             }
-        })
-    });
-
-    $("#editForm").on("submit",function(e){
-        e.preventDefault()
-        var id = $("#id").val()
-
-        $.ajax({
-            url: "/vw_user"+id,
-            method: "PATCH",
-            data: $(this).serialize(),
-            success:function(){
-                $('.data-table').DataTable().ajax.reload();
-                $("#edit-modal").modal("hide")
-                flash("success","Data berhasil diupdate")
-            }
-        })
-    })
-
-
-    //Fungsi edit delete
-
-    $('body').on("click",".btn-delete",function(){
-        var id = $(this).attr("id")
-        $(".btn-destroy").attr("id",id)
-        $("#destroy-modal").modal("show")
-    });
-
-    $(".btn-destroy").on("click",function(){
-        var id = $(this).attr("id")
-
-        $.ajax({
-            url: "/vw_user"+id,
-            method: "DELETE",
-            success:function(){
-                $("#destroy-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash('success','Data berhasil dihapus')
-            }
-        });
-    })
-
-    function flash(type,message){
-        $(".notify").html(`<div class="alert alert-`+type+` alert-dismissible fade show" role="alert">
-                              `+message+`
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>`)
-    }
-
 </script>
 @endpush
