@@ -135,8 +135,8 @@ class MProduk extends Model
         $query = DB::table('tbl_produk')
         ->join('tbl_kategori', 'tbl_kategori.Id_Kategori', '=', 'tbl_produk.Kategori')
         ->join('tbl_merek', 'tbl_merek.Id_Merek', '=', 'tbl_produk.Merek')
-        ->select('tbl_produk.Id_Produk','tbl_kategori.Nama_Kategori','tbl_merek.Nama_Merek','tbl_produk.Nama_Produk','tbl_produk.Harga',
-        'tbl_produk.Stok_Produk','tbl_produk.Spesifikasi','tbl_produk.Foto_Produk','tbl_produk.Kategori',
+        ->select('tbl_produk.Id_Produk','tbl_kategori.Nama_Kategori','tbl_merek.Nama_Merek','tbl_produk.Nama_Produk',
+        'tbl_produk.Harga','tbl_produk.Stok_Produk','tbl_produk.Spesifikasi','tbl_produk.Foto_Produk','tbl_produk.Kategori',
         'tbl_kategori.Nama_Kategori', 'tbl_produk.Merek')
         ->where('Nama_Kategori', 'Laptop')
         ->get();
