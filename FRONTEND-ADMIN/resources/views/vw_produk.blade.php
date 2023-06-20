@@ -1,6 +1,6 @@
-@extends('home',[
+@extends('layout.template',[
     'title' => 'Manage Data',
-    'pageTitle' =>'Manage Data',
+    'pageTitle' =>'Data Produk',
 ])
 
 @push('css')
@@ -22,19 +22,45 @@
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
+                            <th>Aksi</th>
+                            <th>Id Produk</th>
+                            <th>Nama Produk</th>
                             <th>Harga</th>
-                            <th>Stok</th>
+                            <th>Stok Produk</th>
                             <th>Spesifikasi</th>
                             <th>Foto Produk</th>
-                            <th>Link Foto</th>
                             <th>Kategori</th>
                             <th>Merk</th>
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                      @foreach ($result->tampilproduk as $output)
+                          <tr>
+                            <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                              <button id="btn_ubah" class="btn btn-primary btn-circle btn-sm"
+                                  onclick=""><i class="fa-solid fa-pen-to-square"></i></button>
+                              <button id="btn_hapus" class="btn btn-danger btn-circle btn-sm"
+                              onclick=""><i class="fas fa-trash"></i></button>
+                            </td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
+                                {{ $output->Id_Produk }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Nama_Produk }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Harga }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Stok_Produk }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Spesifikasi }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Foto_Produk }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Kategori }}</td>
+                              <td class="border-solid border-2 border-teal-600 bg-transparent px-2.5">
+                                {{ $output->Merek }}</td>
+                          </tr>
+                      @endforeach
+                  </tbody>
                 </table>
             </div>
         </div>
@@ -173,121 +199,4 @@
 <script src="{{ asset('template/backend/sb-admin-2') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="{{ asset('template/backend/sb-admin-2') }}/js/demo/datatables-demo.js"></script>
 
-<script type="text/javascript">
-
-  $(function () {
-    
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ url('/vw_produk') }}",
-        columns: [
-            {data: 'DT_RowIndex' , name: 'Id_Produk'},
-            {data: 'nama', name: 'Nama_Produk'},
-            {data: 'harga', name: 'Harga'},
-            {data: 'stok', name: 'Stok_Produk'},
-            {data: 'spesifikasi', name: 'Spesifikasi'},
-            {data: 'foto', name: 'Foto_Produk'},
-            {data: 'kategori', name: 'Kategori_Produk'},
-            {data: 'merk', name: 'Merek'},
-            
-        ]
-    });
-  });
-
-
-    // Reset Form
-        function resetForm(){
-            $("[name='Nama_Produk']").val("")
-        }
-    //
-
-    // Create 
-
-    $("#createForm").on("submit",function(e){
-        e.preventDefault()
-
-        $.ajax({
-            url: "/vw_produk",
-            method: "POST",
-            data: $(this).serialize(),
-            success:function(){
-                $("#create-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash("success","Data berhasil ditambah")
-                resetForm()
-            }
-        })
-    })
-
-    // Create
-
-    // Edit & Update
-    $('body').on("click",".btn-edit",function(){
-        var id = $(this).attr("Id_Produk")
-        
-        $.ajax({
-            url: "/vw_produk"+id+"/edit",
-            method: "GET",
-            success:function(response){
-                $("#edit-modal").modal("show")
-                $("#Id_Produk").val(response.Id_Produk)
-                $("#Nama_Produk").val(response.Nama_Produk)
-                $("#Harga").val(response.Harga)
-                $("#Stok_Produk").val(response.Stok_Produk)
-                $("#Spesifikasi").val(response.Spesifikasi)
-                $("#Foto_Produk").val(response.Foto_Produk)
-                $("#Kategori").val(response.Kategori)
-                $("#Merek").val(response.Merek)
-            }
-        })
-    });
-
-    $("#editForm").on("submit",function(e){
-        e.preventDefault()
-        var id = $("#Id_Produk").val()
-
-        $.ajax({
-            url: "/vw_produk"+id,
-            method: "PATCH",
-            data: $(this).serialize(),
-            success:function(){
-                $('.data-table').DataTable().ajax.reload();
-                $("#edit-modal").modal("hide")
-                flash("success","Data berhasil diupdate")
-            }
-        })
-    })
-    //Edit & Update
-
-    $('body').on("click",".btn-delete",function(){
-        var id = $(this).attr("Id_Produk")
-        $(".btn-destroy").attr("Id_Produk",id)
-        $("#destroy-modal").modal("show")
-    });
-
-    $(".btn-destroy").on("click",function(){
-        var id = $(this).attr("Id_Produk")
-
-        $.ajax({
-            url: "/vw_produk"+id,
-            method: "DELETE",
-            success:function(){
-                $("#destroy-modal").modal("hide")
-                $('.data-table').DataTable().ajax.reload();
-                flash('success','Data berhasil dihapus')
-            }
-        });
-    })
-
-    function flash(type,message){
-        $(".notify").html(`<div class="alert alert-`+type+` alert-dismissible fade show" role="alert">
-                              `+message+`
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>`)
-    }
-
-</script>
 @endpush

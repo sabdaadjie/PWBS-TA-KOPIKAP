@@ -1,4 +1,4 @@
-@extends('home',[
+@extends('layout.template',[
     'title' => 'Dashboard',
     'pageTitle' => 'Dashboard'
 ])

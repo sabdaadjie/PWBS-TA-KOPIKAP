@@ -10,14 +10,14 @@ class AdminController extends Controller
 {
     function __construct()
     {
-        $this->admin = new \GuzzleHttp\Client();
+        $this->client = new \GuzzleHttp\Client();
 
     }
 
-    function home()
+    function index()
     {
         // menampilkan halaman dashboard
-        return view('home');
+        return view('layout.dashboard');
     }
 
        // buat fungsi tampil merek
@@ -27,7 +27,7 @@ class AdminController extends Controller
         $url = env("API_URL")."tampilmerek";
 
         // ambil service "get" dari server
-        $request = $this->admin->get($url);
+        $request = $this->client->get($url);
 
         // menampilkan hasil
         $response = $request->getBody();
@@ -46,7 +46,7 @@ class AdminController extends Controller
 
 
         // ambil service "get" dari server
-        $request = $this->admin->get($url);
+        $request = $this->client->get($url);
 
         // menampilkan hasil
         $response = $request->getBody();
@@ -57,26 +57,43 @@ class AdminController extends Controller
         return view("vw_kategori",$data);
     }
 
-    function dashboard()
-    {
-        // menampilkan halaman dashboard
-        return view('layout.dashboard');
-    }
-    
-    function user()
-    {
-        // tampilkan view "vw_user"
-        return view("vw_user");
-
-    }
-
+    // buat fungsi tampil produk
     function produk()
     {
-        // tampilkan view "vw_produk"
-        return view("vw_produk");
+        // untuk get dari data server
+        $url = env("API_URL")."tampilproduk";
 
+
+        // ambil service "get" dari server
+        $request = $this->client->get($url);
+
+        // menampilkan hasil
+        $response = $request->getBody();
+
+        $data["result"] = json_decode($response);
+
+        // panggil view "produk"
+        return view("vw_produk",$data);
     }
     
+    // buat fungsi tampil user
+    function user()
+    {
+        // untuk get dari data server
+        $url = env("API_URL")."tampiluser";
+
+
+        // ambil service "get" dari server
+        $request = $this->client->get($url);
+
+        // menampilkan hasil
+        $response = $request->getBody();
+
+        $data["result"] = json_decode($response);
+
+        // panggil view "user"
+        return view("vw_user",$data);
+    }
     
     function profile()
     {
@@ -92,7 +109,7 @@ class AdminController extends Controller
         $url = env("API_URL")."insert";
 
         // ambil service "post" dari server
-        $request = $this->admin->post($url,[
+        $request = $this->client->post($url,[
             "form_params" => [
                 "Id_Merek" => $req->Id_Merek,
                 "Nama_Merek" => $req->Nama_Merek
@@ -102,24 +119,22 @@ class AdminController extends Controller
         // menampilkan hasil dari post server
         $response = $request->getBody();
 
-        // kirim hasil service "post" ke "en_karyawan"
         echo $response;
     }
 
-        // fungsi untuk hapus data karyawan
+        // fungsi untuk hapus data merek
         function delete($parameter)
         {
             $kode = base64_encode($parameter);
             // url untuk delete dari data server
-            $url = env("API_URL")."delete/". $kode;
+            $url = env("API_URL")."delete/". $Id_Merek;
     
             // ambil service "delete" dari server
-            $request = $this->admin->delete($url);
+            $request = $this->client->delete($url);
     
             // menampilkan hasil dari delete server
             $response = $request->getBody();
             
-            // kirim hasil service "delete" ke "vw_karyawan"
             echo $response;
         }
     

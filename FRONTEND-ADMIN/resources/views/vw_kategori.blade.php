@@ -1,6 +1,6 @@
-@extends('home',[
+@extends('layout.template',[
     'title' => 'Manage Data',
-    'pageTitle' =>'Manage Data',
+    'pageTitle' =>'Data Kategori',
 ])
 {{-- @extends('layout/main_tamplate') --}}
 
@@ -32,12 +32,10 @@
                       @foreach ($result->tampilkategori as $output)
                           <tr>
                               <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
-                                <button id="btn_ubah" class="bg-sky-600 text-white w-10 h-8 rounded-lg"
-                                    onclick=""><i
-                                        class="fa-solid fa-pen-to-square"></i></button>
-                                <button id="btn_hapus" class="bg-red-600 text-white w-10 h-8 rounded-lg"
-                                    onclick=""><i
-                                        class="fa-solid fa-trash"></i></button>
+                                <button id="btn_ubah" class="btn btn-primary btn-circle btn-sm"
+                                    onclick=""><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button id="btn_hapus" class="btn btn-danger btn-circle btn-sm"
+                                onclick=""><i class="fas fa-trash"></i></button>
                               </td>
                               <td class="border-solid border-2 border-teal-600 bg-transparent text-center px-2.5">
                                 {{ $output->Id_Kategori }}</td>

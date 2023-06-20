@@ -1,6 +1,6 @@
-@extends('home',[
+@extends('layout.template',[
     'title' => 'Manage Data',
-    'pageTitle' =>'Manage Data',
+    'pageTitle' =>'Data Merk',
 ])
 
 @push('css')
@@ -49,7 +49,6 @@
 </div>
 
 <!-- Modal Create -->
-@foreach ($result->tampilmerek as $output)
 <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="create-modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -63,11 +62,11 @@
         <form id="createForm">
         <div class="form-group">
             <label for="n">Id Merk</label>
-            <input type="" required="" id="n" name="name" class="form-control">
+            <input type="" required="" id="txt_Id_Merek" name="Id_Merek" class="form-control">
         </div>
         <div class="form-group">
             <label for="e">Nama Merk</label>
-            <input type="" required="" id="e" name="email" class="form-control">
+            <input type="" required="" id="txt_Nama_Merek" name="Nama_Merek" class="form-control">
         </div>
       </div>
       <div class="modal-footer">
@@ -78,7 +77,6 @@
     </div>
   </div>
 </div>
-@endforeach
 <!-- Modal Create -->
 
 <!-- Modal Edit -->
@@ -153,9 +151,9 @@
       const Id_Merek = document.querySelector("#txt_Id_Merek").value === "" ? 
       // hasil jika kondisi benar
       [
-          // tampilkan error nik
+          // tampilkan error merek
           document.querySelector("#err_Id_Merek").style.display = 'unset',
-          // Ubah class "txt_nik"
+          // Ubah class "txt_merek"
           document.querySelector("#txt_Id_Merek").className = "w-full border-2 border-transparent border-b-rose-500 focus:outline-none rounded",
           // set error = 0
           err_Id_Merek = 1
@@ -163,7 +161,7 @@
       :
       // Hasil Jika salah
       [
-          // Sembunyikan err_nik
+          // Sembunyikan err
           document.querySelector("#err_Id_Merek").style.display = 'none',
 
           document.querySelector("#txt_Id_Merek").className = "w-full border-2 border-transparent border-b-sky-500 focus:outline-none focus:ring focus:border-rose-600 rounded",
